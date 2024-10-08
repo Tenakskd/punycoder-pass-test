@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName “[Hakuobi]”
+AuthUserFile “[siawaseok]”
+require valid-user
