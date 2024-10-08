@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: punycode-us
+    name: punycode-encoder
     env: python
     region: Oregon
     plan: free
