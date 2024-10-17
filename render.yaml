@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: punycode-encoder
+    name: github-assets-repositorys
     env: python
     region: Oregon
     plan: free
