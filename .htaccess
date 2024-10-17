@@ -1,4 +1,0 @@
-AuthType Basic
-AuthName “[Hakuobi]”
-AuthUserFile “[blog]”
-require valid-user
