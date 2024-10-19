@@ -13,8 +13,8 @@ max_api_wait_time = 3
 max_time = 10
 apis = [r"https://inv.bp.projectsegfau.lt/", 
 r"https://poketube.fun/",
-r"https://y.com.sb",
-r"https://yewtu.be",
+r"https://y.com.sb/",
+r"https://yewtu.be/",
 r”https://invidious.flokinet.to/“,
 r”https://invidious.baczek.me”,
 r”https://invidious.0011.lt/“,
