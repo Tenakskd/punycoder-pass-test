@@ -14,6 +14,7 @@ max_time = 6
 apis = [
 r"https://inv.bp.projectsegfau.lt/", 
 r"https://y.com.sb/",
+r"https://yt.drgnz.club/",
 r"https://inv.nadeko.net/", 
 r"https://inv.odyssey346.dev/", 
 r"https://inv.privacy.com.de/",
