@@ -12,6 +12,14 @@ from cache import cache
 max_api_wait_time = 3
 max_time = 10
 apis = [r"https://inv.bp.projectsegfau.lt/", 
+r”https://invidious.flokinet.to/“,
+r”https://invidious.baczek.me”,
+r”https://invidious.0011.lt/“,
+r”https://inv.zzls.xyz/“,
+r”https://yt.yoc.ovh/feed/popular”,
+r”https://invidious.poast.org/“,
+r”https://invidious.ethibox.fr/“,
+r”https://rust.oskamp.nl/“,
 r"https://youtube.lurkmore.com/"
 r"https://youtube.alt.tyil.nl/",
 r"https://inv.nadeko.net/", 
