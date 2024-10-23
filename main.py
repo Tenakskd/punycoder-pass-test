@@ -13,6 +13,7 @@ max_api_wait_time = 3
 max_time = 6
 apis = [
 r"https://inv.bp.projectsegfau.lt/", 
+r"https://invidious.baczek.me/",
 r"https://inv.in.projectsegfau.lt/,
 r"https://y.com.sb/",
 r"https://yewtu.be/",
