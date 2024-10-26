@@ -12,13 +12,13 @@ from cache import cache
 max_api_wait_time = 3
 max_time = 6
 apis = [
+r"https://inv.nadeko.net/",
 r"https://inv.bp.projectsegfau.lt/", 
 r"https://invidious.baczek.me/",
 r"https://invidious.private.coffee/",
 r"https://y.com.sb/",
 r"https://yewtu.be/",
-r"https://yt.drgnz.club/",
-r"https://inv.nadeko.net/", 
+r"https://yt.drgnz.club/", 
 r"https://inv.odyssey346.dev/", 
 r"https://inv.privacy.com.de/",
 r"https://inv.riverside.rocks/",
