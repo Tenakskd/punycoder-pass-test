@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: github-assets-repositorys
+    name: news-pal.world
     env: python
     region: Oregon
     plan: free
