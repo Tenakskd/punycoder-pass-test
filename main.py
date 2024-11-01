@@ -13,7 +13,9 @@ max_api_wait_time = 3
 max_time = 6
 apis = [
 r"https://invidious.catspeed.cc/", 
+r"https://invidious.schenkel.eti.br",
 r"https://inv.nadeko.net/",
+r"https://inv.nadeko.net/switchbackend?backend_id=1",
 r"https://inv.nadeko.net/switchbackend?backend_id=2/",
 r"https://inv.nadeko.net/switchbackend?backend_id=3/",
 r"https://inv.nadeko.net/switchbackend?backend_id=4/",
