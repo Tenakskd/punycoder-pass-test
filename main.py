@@ -14,6 +14,7 @@ max_time = 6
 apis = [
 r"https://invidious.catspeed.cc/", 
 r"https://invidious.schenkel.eti.br",
+r"https://invidious.nerdvpn.de/", 
 r"https://inv.nadeko.net/",
 r"https://inv.nadeko.net/switchbackend?backend_id=1",
 r"https://inv.nadeko.net/switchbackend?backend_id=2/",
@@ -33,7 +34,6 @@ r"https://invidious.schenkel.eti.br/",
 r"https://invidious.privacydev.net/", 
 r"https://inv.qilk.de/", 
 r"https://iv.nowhere.moe/"
-r"https://invidious.nerdvpn.de/", 
 r"https://invidious.baczek.me/",
 r"https://y.com.sb/",
 r"https://inv.riverside.rocks/",
