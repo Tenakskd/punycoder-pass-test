@@ -57,7 +57,7 @@
                         {% if result["type"] == "video" %}
                         <a style="width:100%" href="/watch?v={{ result['id'] }}">
                             <div class="thumbnail">
-                                <img loading="lazy" class="thumbnail" src="{% if proxy == "True" %}/thumbnail?v={{ result['id'] }}{% else %}https://img.youtube.com/vi/{{ result['id'] }}/0.jpg{% endif %}" onerror="document.cookie = 'proxy=True;max-age=2592000;';">
+                                <img loading="lazy" class="thumbnail" src="{% if proxy == "True" %}/thumbnail?v={{ result['id'] }}{% else %}https://i.ytimg.com/vi/{{result['id']}}/default.jpg{% endif %}" onerror="document.cookie = 'proxy=True;max-age=2592000;';">
                                 <p class="length">{{result["length"]}}</p>
                             </div>
                             <p dir="auto">{{ result['title'] }}</p>
