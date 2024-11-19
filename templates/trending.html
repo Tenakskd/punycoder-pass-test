@@ -13,9 +13,9 @@
         <div class="video-card">
             <h2>{{ video.title }}</h2>
             <img src="{{ video.videoThumbnails[0].url }}" alt="{{ video.title }}">
-            <p>著者: {{ video.author }}</p>
-            <p>視聴回数: {{ video.viewCount }}</p>
-            <p>公開: {{ video.publishedText }}</p>
+            <p>{{ video.author }}</p>
+            <p> {{ video.viewCount }}</p>
+            <p> {{ video.publishedText }}</p>
             <a href="/watch?v={{ video.videoId }}">動画を見る</a>
         </div>
         {% endfor %}
