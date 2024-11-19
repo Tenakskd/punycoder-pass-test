@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>急上昇</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <h1>急上昇</h1>
+    <div class="video-container">
+        {% for video in videos %}
+        <div class="video-card">
+            <h2>{{ video.title }}</h2>
+            <img src="{{ video.videoThumbnails[0].url }}" alt="{{ video.title }}">
+            <p>著者: {{ video.author }}</p>
+            <p>視聴回数: {{ video.viewCount }}</p>
+            <p>公開: {{ video.publishedText }}</p>
+            <a href="/watch?v={{ video.videoId }}">動画を見る</a>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
