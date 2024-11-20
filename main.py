@@ -12,20 +12,21 @@ from cache import cache
 max_api_wait_time = 3
 max_time = 10
 apis = [
+r"https://inv.nadeko.net/",
+r"https://inv.nadeko.net/switchbackend?backend_id=2",
+r"https://inv.nadeko.net/switchbackend?backend_id=3",
+r"https://inv.nadeko.net/switchbackend?backend_id=4",
+r"https://invidious.nerdvpn.de/",
 r"https://iv.duti.dev/",
 r"https://invidious.catspeed.cc/", 
 r"https://invidious.technicalvoid.dev/",
 r"https://invidious.schenkel.eti.br",
 r"https://yewtu.be/", 
-r"https://invidious.nerdvpn.de/",
-r"https://inv.nadeko.net/",
 r"https://invi.susurrando.com/",
 r"https://invidious.jing.rocks/", 
 r"https://y.com.sb/",
-r"https://yewtu.be/",
-r"https://yt.drgnz.club/", 
-r"https://inv.tux.pizza/",
-r"https://iv.ggtyler.dev/", 
+r"https://inv.tux.pizza/"
+r"https://iv.ggtyler.dev/",
 r"https://iv.nboeck.de/", 
 r"https://invidious.adminforge.ge/",
 r"https://invidious.materialio.us/", 
