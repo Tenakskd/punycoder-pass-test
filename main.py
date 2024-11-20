@@ -83,7 +83,11 @@ apicomments = []
 [[apichannels.append(i),apicomments.append(i)] for i in apis]
 class APItimeoutError(Exception):
     pass
-
+video_apis = [
+    r"https://invidious.jing.rocks/",
+    r"https://invidious.nerdvpn.de/",
+   r"https://script.google.com/macros/s/AKfycbzDTu2EJQrGPPU-YS3EFarXbfh9zGB1zR9ky-9AunHl7Yp3Gq83rh1726JYjxbjbEsB/exec?videoId="
+]
 def is_json(json_str):
     result = False
     try:
