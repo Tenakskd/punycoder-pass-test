@@ -78,16 +78,11 @@ version = "1.0"
 
 os.system("chmod 777 ./yukiverify")
 
-apichannels = apis.copy()
-apicomments = apis.copy()
+apichannels = []
+apicomments =[]
 [[apichannels.append(i),apicomments.append(i)] for i in apis]
 class APItimeoutError(Exception):
     pass
-video_apis = [
-    r"https://invidious.jing.rocks/",
-    r"https://invidious.nerdvpn.de/",
-   r"https://script.google.com/macros/s/AKfycbzDTu2EJQrGPPU-YS3EFarXbfh9zGB1zR9ky-9AunHl7Yp3Gq83rh1726JYjxbjbEsB/exec?videoId="
-]
 def is_json(json_str):
     result = False
     try:
@@ -164,33 +159,7 @@ def apichannelrequest(url):
             apichannels.remove(api)
     raise APItimeoutError("APIがタイムアウトしました")
     
-# 動画取得用APIリストの作成
-video_apis = [
-    r"https://invidious.jing.rocks/",
-    r"https://invidious.nerdvpn.de/",
-   r"https://script.google.com/macros/s/AKfycbzDTu2EJQrGPPU-YS3EFarXbfh9zGB1zR9ky-9AunHl7Yp3Gq83rh1726JYjxbjbEsB/exec?videoId="
-]
-def apirequest_video(url):
-    global video_apis
-    starttime = time.time()
-    for api in video_apis:
-        if time.time() - starttime >= max_time - 1:
-            break
-        try:
-            res = requests.get(api + url, timeout=max_api_wait_time)
-            if res.status_code == 200 and is_json(res.text):
-                print(f"動画API成功: {api}")  # 成功したAPIをログに出力
-                return res.text
-            else:
-                print(f"エラー: {api}")
-                video_apis.append(api)
-                video_apis.remove(api)
-        except:
-            print(f"タイムアウト: {api}")
-            video_apis.append(api)
-            video_apis.remove(api)
-    raise APItimeoutError("動画用APIがタイムアウトしました")
-    
+
 def get_info(request):
     global version
     return json.dumps([version,os.environ.get('RENDER_EXTERNAL_URL'),str(request.scope["headers"]),str(request.scope['router'])[39:-2]])
