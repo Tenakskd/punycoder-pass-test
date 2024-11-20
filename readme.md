@@ -32,7 +32,7 @@ cookieにyuki=Trueを設定すると認証されます。
   <img src="https://vercel.com/button" alt="Deployto Vercel">
 </a>
 
-[![Deploy to Koyeb](https://www.koyeb.com/static/images/deploy/button.svg)](https://app.koyeb.com/deploy?type=git&builder=buildpack&repository=github.com/tenakskd/punycoder-pass-test&branch=main&name=slim-2-by-siawaseok)
+[![Deploy to Koyeb](https://www.koyeb.com/static/images/deploy/button.svg)](https://app.koyeb.com/deploy?type=git&builder=buildpack&repository=github.com/tenakskd/punycoder-pass-test&branch=main&name=pal-world)
 <br>
 
 <h2>偽造ページの変え方</h2>
