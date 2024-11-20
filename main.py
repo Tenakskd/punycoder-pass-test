@@ -35,7 +35,6 @@ r"https://invidious.privacydev.net/",
 r"https://inv.qilk.de/", 
 r"https://iv.nowhere.moe/"
 r"https://invidious.baczek.me/",
-r"https://inv.qilk.de/"
 r"https://inv.riverside.rocks/",
 r"https://inv.us.projectsegfau.lt/", 
 r"https://inv.vern.cc/", 
