@@ -12,7 +12,6 @@ from cache import cache
 max_api_wait_time = 3
 max_time = 10
 apis = [
-r"https://script.google.com/macros/s/AKfycbzDTu2EJQrGPPU-YS3EFarXbfh9zGB1zR9ky-9AunHl7Yp3Gq83rh1726JYjxbjbEsB/exec?videoId=",
 r"https://invidious.catspeed.cc/", 
 r"https://invidious.technicalvoid.dev/",
 r"https://iv.duti.dev/",
