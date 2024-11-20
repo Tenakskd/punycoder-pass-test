@@ -4,8 +4,8 @@ import urllib.parse
 import time
 import datetime
 import random
-import os
 import subprocess
+import os
 from cache import cache
 
 
@@ -79,10 +79,11 @@ version = "1.0"
 os.system("chmod 777 ./yukiverify")
 
 apichannels = []
-apicomments =[]
+apicomments = []
 [[apichannels.append(i),apicomments.append(i)] for i in apis]
 class APItimeoutError(Exception):
     pass
+
 def is_json(json_str):
     result = False
     try:
@@ -91,30 +92,49 @@ def is_json(json_str):
     except json.JSONDecodeError as jde:
         pass
     return result
-#汎用リクエスト
+
 def apirequest(url):
     global apis
     global max_time
     starttime = time.time()
     for api in apis:
-        if time.time() - starttime >= max_time - 1:
+        if  time.time() - starttime >= max_time -1:
             break
         try:
-            res = requests.get(api + url, timeout=max_api_wait_time)
+            res = requests.get(api+url,timeout=max_api_wait_time)
             if res.status_code == 200 and is_json(res.text):
-                print(f"成功したAPI: {api}")  
                 return res.text
             else:
-                print(f"エラー: {api}")
+                print(f"エラー:{api}")
                 apis.append(api)
                 apis.remove(api)
         except:
-            print(f"タイムアウト: {api}")
+            print(f"タイムアウト:{api}")
             apis.append(api)
             apis.remove(api)
     raise APItimeoutError("APIがタイムアウトしました")
-    
-# コメント用のリクエスト
+
+def apichannelrequest(url):
+    global apichannels
+    global max_time
+    starttime = time.time()
+    for api in apichannels:
+        if  time.time() - starttime >= max_time -1:
+            break
+        try:
+            res = requests.get(api+url,timeout=max_api_wait_time)
+            if res.status_code == 200 and is_json(res.text):
+                return res.text
+            else:
+                print(f"エラー:{api}")
+                apichannels.append(api)
+                apichannels.remove(api)
+        except:
+            print(f"タイムアウト:{api}")
+            apichannels.append(api)
+            apichannels.remove(api)
+    raise APItimeoutError("APIがタイムアウトしました")
+
 def apicommentsrequest(url):
     global apicomments
     global max_time
@@ -127,47 +147,19 @@ def apicommentsrequest(url):
             if res.status_code == 200 and is_json(res.text):
                 return res.text
             else:
-                print(f"コメント:エラー:{api}")
+                print(f"エラー:{api}")
                 apicomments.append(api)
                 apicomments.remove(api)
         except:
-            print(f"コメント:タイムアウト:{api}")
+            print(f"タイムアウト:{api}")
             apicomments.append(api)
             apicomments.remove(api)
     raise APItimeoutError("APIがタイムアウトしました")
 
-# チャンネル用リクエスト
-def apichannelrequest(url):
-    global apichannels
-    global max_time
-    starttime = time.time()
-    for api in apichannels:
-        if time.time() - starttime >= max_time - 1:
-            break
-        try:
-            res = requests.get(api + url, timeout=max_api_wait_time)
-            if res.status_code == 200 and is_json(res.text):
-                print(f"成功したAPI: {api}")  
-                return res.text
-            else:
-                print(f"チャンネル表示エラー: {api}")
-                apichannels.append(api)
-                apichannels.remove(api)
-        except:
-            print(f"タイムアウト: {api}")
-            apichannels.append(api)
-            apichannels.remove(api)
-    raise APItimeoutError("APIがタイムアウトしました")
-    
 
 def get_info(request):
     global version
     return json.dumps([version,os.environ.get('RENDER_EXTERNAL_URL'),str(request.scope["headers"]),str(request.scope['router'])[39:-2]])
-
-def get_trending(videoid):
-    global logs
-    t = json.loads(apirequest(r"api/v1/trending/"+ urllib.parse.quote(videoid)))
-    return [{"id":i["videoId"],"title":i["title"],"authorId":i["authorId"],"author":i["author"]} for i in t["recommendedVideos"]],list(reversed([i["url"] for i in t["formatStreams"]]))[:2],t["descriptionHtml"].replace("\n","<br>"),t["title"],t["authorId"],t["author"],t["authorThumbnails"][-1]["url"]
     
 def get_data(videoid):
     global logs
@@ -210,16 +202,9 @@ def get_comments(videoid):
 def get_replies(videoid,key):
     t = json.loads(apicommentsrequest(fr"api/v1/comments/{videoid}?hmac_key={key}&hl=jp&format=html"))["contentHtml"]
 
-def get_level(yuki):
-    for i1 in range(1,13):
-        with open(f'Level{i1}.txt', 'r', encoding='UTF-8', newline='\n') as f:
-            if siawaseok in [i2.rstrip("\r\n") for i2 in f.readlines()]:
-                return i1
-    return 0
 
 
 def check_cokie(cookie):
-    print(cookie)
     if cookie == "True":
         return True
     return False
@@ -233,11 +218,13 @@ def get_verifycode():
         print(f"Error: {e}")
         return None
 
-    
+
+
+
 
 from fastapi import FastAPI, Depends
-from fastapi import Response, Cookie, Request
-from fastapi.responses import HTMLResponse, PlainTextResponse
+from fastapi import Response,Cookie,Request
+from fastapi.responses import HTMLResponse,PlainTextResponse
 from fastapi.responses import RedirectResponse as redirect
 from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.staticfiles import StaticFiles
@@ -247,7 +234,7 @@ from typing import Union
 
 app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
 app.mount("/css", StaticFiles(directory="./css"), name="static")
-app.mount("/word", StaticFiles(directory="./blog", html=True), name="static")
+app.mount("/blog", StaticFiles(directory="./blog", html=True), name="static")
 app.add_middleware(GZipMiddleware, minimum_size=1000)
 
 from fastapi.templating import Jinja2Templates
@@ -257,73 +244,77 @@ template = Jinja2Templates(directory='templates').TemplateResponse
 
 
 
-
 @app.get("/", response_class=HTMLResponse)
-def home(response: Response, request: Request, yuki: Union[str] = Cookie(None)):
+def home(response: Response,request: Request,yuki: Union[str] = Cookie(None)):
     if check_cokie(yuki):
-        response.set_cookie("yuki", "True", max_age=60 * 60 * 24 * 7)
-        return template("home.html", {"request": request})
-    print(check_cokie(yuki))
-    return redirect("/word")
+        response.set_cookie("yuki","True",max_age=60 * 60 * 24 * 7)
+        return template("home.html",{"request": request})
+    return redirect("/blog")
 
 @app.get('/watch', response_class=HTMLResponse)
-def video(v:str, response: Response, request: Request, yuki: Union[str] = Cookie(None), proxy: Union[str] = Cookie(None)):
+def video(v:str,response: Response,request: Request,yuki: Union[str] = Cookie(None),proxy: Union[str] = Cookie(None)):
     if not(check_cokie(yuki)):
         return redirect("/")
-    response.set_cookie(key="yuki", value="True", max_age=7*24*60*60)
+    response.set_cookie(key="yuki", value="True",max_age=7*24*60*60)
     videoid = v
     t = get_data(videoid)
-    response.set_cookie("yuki", "True", max_age=60 * 60 * 24 * 7)
-    return template('video.html', {"request": request, "videoid":videoid, "videourls":t[1], "res":t[0], "description":t[2], "videotitle":t[3], "authorid":t[4], "authoricon":t[6], "author":t[5], "proxy":proxy})
+    response.set_cookie("yuki","True",max_age=60 * 60 * 24 * 7)
+    return template('video.html', {"request": request,"videoid":videoid,"videourls":t[1],"res":t[0],"description":t[2],"videotitle":t[3],"authorid":t[4],"authoricon":t[6],"author":t[5],"proxy":proxy})
 
 @app.get("/search", response_class=HTMLResponse,)
-def search(q:str, response: Response, request: Request, page:Union[int, None]=1, yuki: Union[str] = Cookie(None), proxy: Union[str] = Cookie(None)):
+def search(q:str,response: Response,request: Request,page:Union[int,None]=1,yuki: Union[str] = Cookie(None),proxy: Union[str] = Cookie(None)):
     if not(check_cokie(yuki)):
         return redirect("/")
-    response.set_cookie("yuki", "True", max_age=60 * 60 * 24 * 7)
-    return template("search.html", {"request": request, "results":get_search(q, page), "word":q, "next":f"/search?q={q}&page={page + 1}", "proxy":proxy})
+    response.set_cookie("yuki","True",max_age=60 * 60 * 24 * 7)
+    return template("search.html", {"request": request,"results":get_search(q,page),"word":q,"next":f"/search?q={q}&page={page + 1}","proxy":proxy})
 
 @app.get("/hashtag/{tag}")
-def search(tag:str, response: Response, request: Request, page:Union[int, None]=1, yuki: Union[str] = Cookie(None)):
+def search(tag:str,response: Response,request: Request,page:Union[int,None]=1,yuki: Union[str] = Cookie(None)):
     if not(check_cokie(yuki)):
         return redirect("/")
     return redirect(f"/search?q={tag}")
 
 
 @app.get("/channel/{channelid}", response_class=HTMLResponse)
-def channel(channelid:str, response: Response, request: Request, yuki: Union[str] = Cookie(None), proxy: Union[str] = Cookie(None)):
+def channel(channelid:str,response: Response,request: Request,yuki: Union[str] = Cookie(None),proxy: Union[str] = Cookie(None)):
     if not(check_cokie(yuki)):
         return redirect("/")
-    response.set_cookie("yuki", "True", max_age=60 * 60 * 24 * 7)
+    response.set_cookie("yuki","True",max_age=60 * 60 * 24 * 7)
     t = get_channel(channelid)
-    return template("channel.html", {"request": request, "results":t[0], "channelname":t[1]["channelname"], "channelicon":t[1]["channelicon"], "channelprofile":t[1]["channelprofile"], "proxy":proxy})
+    return template("channel.html", {"request": request,"results":t[0],"channelname":t[1]["channelname"],"channelicon":t[1]["channelicon"],"channelprofile":t[1]["channelprofile"],"proxy":proxy})
+
+@app.get("/answer", response_class=HTMLResponse)
+def set_cokie(q:str):
+    if q.count() > 10:
+        return "ランダム"
+    return "文章"
 
 @app.get("/playlist", response_class=HTMLResponse)
-def playlist(list:str, response: Response, request: Request, page:Union[int, None]=1, yuki: Union[str] = Cookie(None), proxy: Union[str] = Cookie(None)):
+def playlist(list:str,response: Response,request: Request,page:Union[int,None]=1,yuki: Union[str] = Cookie(None),proxy: Union[str] = Cookie(None)):
     if not(check_cokie(yuki)):
         return redirect("/")
-    response.set_cookie("yuki", "True", max_age=60 * 60 * 24 * 7)
-    return template("search.html", {"request": request, "results":get_playlist(list, str(page)), "word":"", "next":f"/playlist?list={list}", "proxy":proxy})
+    response.set_cookie("yuki","True",max_age=60 * 60 * 24 * 7)
+    return template("search.html", {"request": request,"results":get_playlist(list,str(page)),"word":"","next":f"/playlist?list={list}","proxy":proxy})
 
 @app.get("/info", response_class=HTMLResponse)
-def viewlist(response: Response, request: Request, yuki: Union[str] = Cookie(None)):
-    global apis, apichannels, apicomments
+def viewlist(response: Response,request: Request,yuki: Union[str] = Cookie(None)):
+    global apis,apichannels,apicomments
     if not(check_cokie(yuki)):
         return redirect("/")
-    response.set_cookie("yuki", "True", max_age=60 * 60 * 24 * 7)
-    return template("info.html", {"request": request, "Youtube_API":apis[0], "Channel_API":apichannels[0], "Comments_API":apicomments[0]})
+    response.set_cookie("yuki","True",max_age=60 * 60 * 24 * 7)
+    return template("info.html",{"request": request,"Youtube_API":apis[0],"Channel_API":apichannels[0],"Comments_API":apicomments[0]})
 
 @app.get("/suggest")
 def suggest(keyword:str):
     return [i[0] for i in json.loads(requests.get(r"http://www.google.com/complete/search?client=youtube&hl=ja&ds=yt&q="+urllib.parse.quote(keyword)).text[19:-1])[1]]
 
 @app.get("/comments")
-def comments(request: Request, v:str):
-    return template("comments.html", {"request": request, "comments":get_comments(v)})
+def comments(request: Request,v:str):
+    return template("comments.html",{"request": request,"comments":get_comments(v)})
 
 @app.get("/thumbnail")
 def thumbnail(v:str):
-    return Response(content = requests.get(fr"https://img.youtube.com/vi/{v}/0.jpg").content, media_type=r"image/jpeg")
+    return Response(content = requests.get(fr"https://img.youtube.com/vi/{v}/0.jpg").content,media_type=r"image/jpeg")
 
 @app.get("/bbs",response_class=HTMLResponse)
 def view_bbs(request: Request,name: Union[str, None] = "",seed:Union[str,None]="",channel:Union[str,None]="main",verify:Union[str,None]="false",yuki: Union[str] = Cookie(None)):
