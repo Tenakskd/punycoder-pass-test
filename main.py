@@ -78,8 +78,8 @@ version = "1.0"
 
 os.system("chmod 777 ./yukiverify")
 
-apichannels = []
-apicomments = []
+apichannels = apis.copy()
+apicomments = apis.copy()
 [[apichannels.append(i),apicomments.append(i)] for i in apis]
 class APItimeoutError(Exception):
     pass
@@ -96,30 +96,7 @@ def is_json(json_str):
     except json.JSONDecodeError as jde:
         pass
     return result
-
-
-
-def apicommentsrequest(url):
-    global apicomments
-    global max_time
-    starttime = time.time()
-    for api in apicomments:
-        if  time.time() - starttime >= max_time -1:
-            break
-        try:
-            res = requests.get(api+url,timeout=max_api_wait_time)
-            if res.status_code == 200 and is_json(res.text):
-                return res.text
-            else:
-                print(f"エラー:{api}")
-                apicomments.append(api)
-                apicomments.remove(api)
-        except:
-            print(f"タイムアウト:{api}")
-            apicomments.append(api)
-            apicomments.remove(api)
-    raise APItimeoutError("APIがタイムアウトしました")
-
+#汎用リクエスト
 def apirequest(url):
     global apis
     global max_time
@@ -141,7 +118,30 @@ def apirequest(url):
             apis.append(api)
             apis.remove(api)
     raise APItimeoutError("APIがタイムアウトしました")
+    
+# コメント用のリクエスト
+def apicommentsrequest(url):
+    global apicomments
+    global max_time
+    starttime = time.time()
+    for api in apicomments:
+        if  time.time() - starttime >= max_time -1:
+            break
+        try:
+            res = requests.get(api+url,timeout=max_api_wait_time)
+            if res.status_code == 200 and is_json(res.text):
+                return res.text
+            else:
+                print(f"コメント:エラー:{api}")
+                apicomments.append(api)
+                apicomments.remove(api)
+        except:
+            print(f"コメント:タイムアウト:{api}")
+            apicomments.append(api)
+            apicomments.remove(api)
+    raise APItimeoutError("APIがタイムアウトしました")
 
+# チャンネル用リクエスト
 def apichannelrequest(url):
     global apichannels
     global max_time
@@ -155,7 +155,7 @@ def apichannelrequest(url):
                 print(f"成功したAPI: {api}")  
                 return res.text
             else:
-                print(f"エラー: {api}")
+                print(f"チャンネル表示エラー: {api}")
                 apichannels.append(api)
                 apichannels.remove(api)
         except:
@@ -163,7 +163,34 @@ def apichannelrequest(url):
             apichannels.append(api)
             apichannels.remove(api)
     raise APItimeoutError("APIがタイムアウトしました")
-
+    
+# 動画取得用APIリストの作成
+video_apis = [
+    r"https://invidious.jing.rocks/",
+    r"https://invidious.nerdvpn.de/",
+   r"https://script.google.com/macros/s/AKfycbzDTu2EJQrGPPU-YS3EFarXbfh9zGB1zR9ky-9AunHl7Yp3Gq83rh1726JYjxbjbEsB/exec?videoId="
+]
+def apirequest_video(url):
+    global video_apis
+    starttime = time.time()
+    for api in video_apis:
+        if time.time() - starttime >= max_time - 1:
+            break
+        try:
+            res = requests.get(api + url, timeout=max_api_wait_time)
+            if res.status_code == 200 and is_json(res.text):
+                print(f"動画API成功: {api}")  # 成功したAPIをログに出力
+                return res.text
+            else:
+                print(f"エラー: {api}")
+                video_apis.append(api)
+                video_apis.remove(api)
+        except:
+            print(f"タイムアウト: {api}")
+            video_apis.append(api)
+            video_apis.remove(api)
+    raise APItimeoutError("動画用APIがタイムアウトしました")
+    
 def get_info(request):
     global version
     return json.dumps([version,os.environ.get('RENDER_EXTERNAL_URL'),str(request.scope["headers"]),str(request.scope['router'])[39:-2]])
