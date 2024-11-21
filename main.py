@@ -249,7 +249,14 @@ def search(tag:str,response: Response,request: Request,page:Union[int,None]=1,yu
     if not(check_cokie(yuki)):
         return redirect("/")
     return redirect(f"/search?q={tag}")
-
+    
+@app.get("/feed/popular/", response_class=HTMLResponse)
+def channel(channelid:str,response: Response,request: Request,yuki: Union[str] = Cookie(None),proxy: Union[str] = Cookie(None)):
+    if not(check_cokie(yuki)):
+        return redirect("/")
+    response.set_cookie("yuki","True",max_age=60 * 60 * 24 * 7)
+    t = get_channel(channelid)
+    return template("popular.html", {"request": request,"results":t[0],"channelname":t[1]["channelname"],"proxy":proxy})
 
 @app.get("/channel/{channelid}", response_class=HTMLResponse)
 def channel(channelid:str,response: Response,request: Request,yuki: Union[str] = Cookie(None),proxy: Union[str] = Cookie(None)):
