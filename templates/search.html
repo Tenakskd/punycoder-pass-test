@@ -47,7 +47,7 @@
                         {% if result["type"] == "video" %}
                         <a style="width:100%" href="/watch?v={{ result['id'] }}">
                             <div class="thumbnail">
-                                <img loading="lazy" class="thumbnail" src="{% if proxy == "True" %}/thumbnail?v={{ result['id'] }}{% else %}https://i.ytimg.com/vi/{{ result['thumbnail'] }}/default.jpg{% endif %}" onerror="document.cookie = 'proxy=True;max-age=2592000;';">
+                                <img loading="lazy" class="thumbnail" src="{% if proxy == "True" %}/thumbnail?v={{ result['id'] }}{% else %}https://i3.ytimg.com/vi/{{ result['thumbnail'] }}/default.jpg{% endif %}" onerror="document.cookie = 'proxy=True;max-age=2592000;';">
                                 <p class="length">{{result["length"]}}</p>
                             </div>
                             <p dir="auto">{{ result['title'] }}</p>
@@ -71,7 +71,7 @@
                         <a style="width:100%" href="/playlist?list={{result["id"]}}">
                 
                             <div class="thumbnail">
-                                <img loading="lazy" tabindex="-1" class="thumbnail" src="{% if proxy == "True" %}/thumbnail?v={{ result['thumbnail'] }}{% else %}https://i.ytimg.com/vi/{{ result['thumbnail'] }}/default.jpg{% endif %}">
+                                <img loading="lazy" tabindex="-1" class="thumbnail" src="{% if proxy == "True" %}/thumbnail?v={{ result['thumbnail'] }}{% else %}https://i3.ytimg.com/vi/{{ result['thumbnail'] }}/default.jpg{% endif %}">
                                 <p class="length">{{result["count"]}}個の丼</p>
                             </div>
                         <p dir="auto">{{result["title"]}}</p>
