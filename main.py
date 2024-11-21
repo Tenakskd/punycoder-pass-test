@@ -12,6 +12,7 @@ from cache import cache
 max_api_wait_time = 3
 max_time = 10
 apis = [
+r"https://wakametubeapi.glitch.me",
 r"https://invidious.nerdvpn.de/",
 r"https://inv.nadeko.net/",
 r"https://inv.nadeko.net/switchbackend?backend_id=2",
