@@ -19,7 +19,6 @@ os.system("chmod 777 ./yukiverify")
 
 apichannels = []
 apicomments = []
-apipopulars = [r"https://invidious.nerdvpn.de/"]
 
 [[apichannels.append(i),apicomments.append(i)] for i in apis]
 class APItimeoutError(Exception):
@@ -54,28 +53,7 @@ def apirequest(url):
             apis.append(api)
             apis.remove(api)
     raise APItimeoutError("APIがタイムアウトしました")
-    
-def apipopularsrequest(url):
-    global apipopulars
-    global max_time
-    starttime = time.time()
-    for api in apipopulars:
-        if  time.time() - starttime >= max_time -1:
-            break
-        try:
-            res = requests.get(api+url,timeout=max_api_wait_time)
-            if res.status_code == 200 and is_json(res.text):
-                return res.text
-            else:
-                print(f"エラー:{api}")
-                apipopulars.append(api)
-                apipopulars.remove(api)
-        except:
-            print(f"タイムアウト:{api}")
-            apipopulars.append(api)
-            apipopulars.remove(api)
-    raise APItimeoutError("APIがタイムアウトしました")
-    
+     
 def apichannelrequest(url):
     global apichannels
     global max_time
@@ -122,20 +100,6 @@ def apicommentsrequest(url):
 def get_info(request):
     global version
     return json.dumps([version,os.environ.get('RENDER_EXTERNAL_URL'),str(request.scope["headers"]),str(request.scope['router'])[39:-2]])
-
-def get_popular(feed/popular/)
-    global logs
-    t = json.loads(apirequest(r"api/v1/popular/"+ urllib.parse.quote(videoid)))
-    def load_popular(i):
-        if i["type"] == "video":
-            return {"title":i["title"],"id":i["videoId"],"authorId":i["authorId"],"author":i["author"],"length":str(datetime.timedelta(seconds=i["lengthSeconds"])),"published":i["publishedText"],"type":"video"}
-        elif i["type"] == "playlist":
-            return {"title":i["title"],"id":i["playlistId"],"thumbnail":i["videos"][0]["videoId"],"count":i["videoCount"],"type":"playlist"}
-        else:
-            if i["authorThumbnails"][-1]["url"].startswith("https"):
-                return {"author":i["author"],"id":i["authorId"],"thumbnail":i["authorThumbnails"][-1]["url"],"type":"channel"}
-            else:
-                return {"author":i["author"],"id":i["authorId"],"thumbnail":r"https://"+i["authorThumbnails"][-1]["url"],"type":"channel"}
                 
     return [load_search(i) for i in t]
 def get_data(videoid):
@@ -153,7 +117,7 @@ def get_search(q,page):
             return {"title":i["title"],"id":i["playlistId"],"thumbnail":i["videos"][0]["videoId"],"count":i["videoCount"],"type":"playlist"}
         else:
             if i["authorThumbnails"][-1]["url"].startswith("https"):
-                return {"author":i["author"],"id":i["authorId"],"thumbnail":i["authorThumbnails"][-1]["url"],"type":"channel"}
+                return {"author":i["author"],"id":i["authorId"],"thumbnail":i["authorThumbnails"][-1]["url"],"type":"channel"} 
             else:
                 return {"author":i["author"],"id":i["authorId"],"thumbnail":r"https://"+i["authorThumbnails"][-1]["url"],"type":"channel"}
     return [load_search(i) for i in t]
@@ -251,14 +215,6 @@ def search(tag:str,response: Response,request: Request,page:Union[int,None]=1,yu
         return redirect("/")
     return redirect(f"/search?q={tag}")
     
-@app.get("/feed/popular/", response_class=HTMLResponse)
-def channel(channelid:str,response: Response,request: Request,yuki: Union[str] = Cookie(None),proxy: Union[str] = Cookie(None)):
-    if not(check_cokie(yuki)):
-        return redirect("/")
-    response.set_cookie("yuki","True",max_age=60 * 60 * 24 * 7)
-    t = get_channel(channelid)
-    return template("popular.html", {"request": request,"results":t[0],"channelname":t[1]["channelname"],"proxy":proxy})
-
 @app.get("/channel/{channelid}", response_class=HTMLResponse)
 def channel(channelid:str,response: Response,request: Request,yuki: Union[str] = Cookie(None),proxy: Union[str] = Cookie(None)):
     if not(check_cokie(yuki)):
