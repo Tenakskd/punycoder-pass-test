@@ -54,11 +54,12 @@ def apirequest(url):
             apis.append(api)
             apis.remove(api)
     raise APItimeoutError("APIがタイムアウトしました")
+    
 def apipopularsrequest(url):
-    global apicomments
+    global apipopulars
     global max_time
     starttime = time.time()
-    for api in apicomments:
+    for api in apipopulars:
         if  time.time() - starttime >= max_time -1:
             break
         try:
@@ -67,12 +68,12 @@ def apipopularsrequest(url):
                 return res.text
             else:
                 print(f"エラー:{api}")
-                apicomments.append(api)
-                apicomments.remove(api)
+                apipopulars.append(api)
+                apipopulars.remove(api)
         except:
             print(f"タイムアウト:{api}")
-            apicomments.append(api)
-            apicomments.remove(api)
+            apipopulars.append(api)
+            apipopulars.remove(api)
     raise APItimeoutError("APIがタイムアウトしました")
     
 def apichannelrequest(url):
