@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      body {
+        font-family: Nico Moji, sans-serif;
+        background-color: #f9f9f9;
+        color: #333;
+        line-height: 1.6;
+        margin: 20px;
+      }
+
+      .comment-container {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 15px;
+        transition: background-color 0.3s ease;
+      }
+
+      .comment-container:hover {
+        background-color: #f1f1f1;
+      }
+
+      img {
+        max-width: 60px;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        margin-right: 15px;
+        object-fit: cover;
+      }
+
+      .rVideoInfo {
+        width: 100%;
+      }
+
+      .rVideoInfo h4 {
+        margin: 0;
+        font-size: 18px;
+        color: #0073e6;
+      }
+
+      .rVideoInfo h4 a {
+        text-decoration: none;
+        color: #0073e6;
+        transition: color 0.3s ease;
+      }
+
+      .rVideoInfo h4 a:hover {
+        color: #005bb5;
+      }
+
+      .rVideoInfo pre {
+        background-color: #f4f4f4;
+        padding: 10px;
+        border-radius: 5px;
+        white-space: pre-wrap;
+        font-size: 14px;
+        line-height: 1.4;
+      }
+      .rVideoInfo small {
+        color: #777;
+        font-size: 12px;
+      }
+
+      .rVideoInfo .likes-heart {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 10px;
+      }
+
+      .rVideoInfo .likes-heart small {
+        margin-right: 15px;
+      }
+
+      a {
+        color: #0073e6;
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+      {% for comment in comments %}
+      <div class="comment-container">
+        <img loading="lazy" src="{{ comment['authoricon'] or '/path/to/default-thumbnail.jpg' }}"/>
+        <div class="rVideoInfo">
+          <h4><a href="/channel/{{ comment['authorid'] }}">{{ comment['author'] or 'Anonymous' }}</a></h4>
+          <pre>{{ comment['body'] | safe }}</pre>
+        </div>
+      </div>
+      {% endfor %}
+  </body>
+</html>
