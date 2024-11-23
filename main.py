@@ -105,6 +105,39 @@ def get_data(videoid):
     t = json.loads(apirequest(r"api/v1/videos/"+ urllib.parse.quote(videoid)))
     return [{"id":i["videoId"],"title":i["title"],"authorId":i["authorId"],"author":i["author"]} for i in t["recommendedVideos"]],list(reversed([i["url"] for i in t["formatStreams"]]))[:2],t["descriptionHtml"].replace("\n","<br>"),t["title"],t["authorId"],t["author"],t["authorThumbnails"][-1]["url"]
 
+def getting_data(videoid):
+    urls = [
+        f"https://ludicrous-wonderful-temple.glitch.me/api/login/{urllib.parse.quote(videoid)}",
+        f"https://free-sudden-kiss.glitch.me/api/login/{urllib.parse.quote(videoid)}",
+        f"https://https://wataamee.glitch.me/api/{urllib.parse.quote(videoid)}",
+        f"https://natural-voltaic-titanium.glitch.me/api/login/{urllib.parse.quote(videoid)}",
+        f"https://jade-highfalutin-account.glitch.me/api/login/{urllib.parse.quote(videoid)}"
+    ]
+    for url in urls:
+        response = requests.get(url)
+        if response.status_code == 200:
+            t = response.json()
+            
+            recommended_videos = [{
+               "id": t["videoId"],
+               "title": t["videoTitle"],
+               "authorId": t["channelId"],
+               "author": t["channelName"],
+               "viewCountText": f"{t['videoViews']} views"
+           }]
+            
+            stream_url = t["stream_url"]
+            description = t["videoDes"].replace("\n", "<br>")
+            title = t["videoTitle"]
+            authorId = t["channelId"]
+            author = t["channelName"]
+            author_icon = t["channelImage"]
+            highstreamUrl = t["highstreamUrl"]
+            audioUrl = t["audioUrl"]
+            
+            return recommended_videos, stream_url, description, title, authorId, author, author_icon, highstreamUrl, audioUrl
+
+
 def get_search(q,page):
     global logs
     t = json.loads(apirequest(fr"api/v1/search?q={urllib.parse.quote(q)}&page={page}&hl=jp"))
@@ -180,9 +213,6 @@ from fastapi.templating import Jinja2Templates
 template = Jinja2Templates(directory='templates').TemplateResponse
 
 
-
-
-
 @app.get("/", response_class=HTMLResponse)
 def home(response: Response,request: Request,yuki: Union[str] = Cookie(None)):
     if check_cokie(yuki):
@@ -199,6 +229,23 @@ def video(v:str,response: Response,request: Request,yuki: Union[str] = Cookie(No
     t = get_data(videoid)
     response.set_cookie("yuki","True",max_age=60 * 60 * 24 * 7)
     return template('video.html', {"request": request,"videoid":videoid,"videourls":t[1],"res":t[0],"description":t[2],"videotitle":t[3],"authorid":t[4],"authoricon":t[6],"author":t[5],"proxy":proxy})
+
+@app.get('/www', response_class=HTMLResponse)
+def video(v: str, request: Request):
+    videoid = v
+    t = getting_data(videoid)
+    return template('highquo.html', {
+        "request": request,
+        "videoid": videoid,
+        "res": t[0],
+        "videourls": t[7],
+        "description": t[2],
+        "videotitle": t[3],
+        "authorid": t[4],
+        "authoricon": t[6],
+        "author": t[5],
+        "audioUrl": t[8],
+    })
 
 @app.get("/search", response_class=HTMLResponse,)
 def search(q:str,response: Response,request: Request,page:Union[int,None]=1,yuki: Union[str] = Cookie(None),proxy: Union[str] = Cookie(None)):
