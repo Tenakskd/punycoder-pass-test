@@ -11,7 +11,40 @@ from cache import cache
 
 max_api_wait_time = 3
 max_time = 10
-apis = [r"https://iv.datura.network/",r"https://invidious.private.coffee/",r"https://invidious.protokolla.fi/",r"https://invidious.perennialte.ch/",r"https://yt.cdaut.de/",r"https://invidious.materialio.us/",r"https://yewtu.be/",r"https://invidious.fdn.fr/",r"https://inv.tux.pizza/",r"https://invidious.privacyredirect.com/",r"https://invidious.drgns.space/",r"https://vid.puffyan.us",r"https://invidious.jing.rocks/",r"https://youtube.076.ne.jp/",r"https://vid.puffyan.us/",r"https://inv.riverside.rocks/",r"https://invidio.xamh.de/",r"https://y.com.sb/",r"https://invidious.sethforprivacy.com/",r"https://invidious.tiekoetter.com/",r"https://inv.bp.projectsegfau.lt/",r"https://inv.vern.cc/",r"https://invidious.nerdvpn.de/",r"https://inv.privacy.com.de/",r"https://invidious.rhyshl.live/",r"https://invidious.slipfox.xyz/",r"https://invidious.weblibre.org/",r"https://invidious.namazso.eu/",r"https://invidious.jing.rocks"]
+apis = [
+r"https://cal1.iv.ggtyler.dev/",
+r"https://pol1.iv.ggtyler.dev/",
+r"https://iv.duti.dev/",
+r"https://invidious.technicalvoid.dev/",
+r"https://yewtu.be/",
+r"https://inv.nadeko.net/",
+r"https://invidious.jing.rocks/",
+r"https://invidious.nerdvpn.de/",
+r"https://invidious.catspeed.cc/",
+r"https://inst1.inv.catspeed.cc/",
+r"https://inst2.inv.catspeed.cc/",
+r"https://inst3.inv.catspeed.cc/",
+r"https://iv.datura.network/",
+r"https://invidious.private.coffee/",
+r"https://inv.vern.cc/",
+r"https://yt.vern.cc/",
+r"https://invidious.vern.cc/",
+r"https://invidious.materialio.us/",
+r"https://inv.tux.pizza/",
+r"https://invidious.yourdevice.ch/",
+r"https://nyc1.iv.ggtyler.dev/",
+r"https://youtube.privacyplz.org/",
+r"https://invidious.privacydev.net/",
+r"https://vid.puffyan.us/",
+r"https://y.com.sb/",
+r"https://invidious.0011.lt/",
+r"https://invidious.baczek.me/",
+r"https://invidious.einfachzocken.eu/",
+r"https://rust.oskamp.nl/",
+r"https://youtube.lurkmore.com/",
+r"https://yt.yoc.ovh/",
+r"https://invidious.flokinet.to/",
+r"https://invidious.fdn.fr/"]
 url = requests.get(r'https://raw.githubusercontent.com/mochidukiyukimi/yuki-youtube-instance/main/instance.txt').text.rstrip()
 version = "1.0"
 
