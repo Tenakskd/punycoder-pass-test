@@ -247,6 +247,10 @@ def video(v: str, request: Request):
         "audioUrl": t[8],
     })
 
+@app.get("/comment")
+def comments(request: Request,v:str):
+    return template("comment.html",{"request": request,"comments":get_comments(v)})
+
 @app.get("/search", response_class=HTMLResponse,)
 def search(q:str,response: Response,request: Request,page:Union[int,None]=1,yuki: Union[str] = Cookie(None),proxy: Union[str] = Cookie(None)):
     if not(check_cokie(yuki)):
