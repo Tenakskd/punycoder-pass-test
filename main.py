@@ -19,7 +19,6 @@ os.system("chmod 777 ./yukiverify")
 
 apichannels = []
 apicomments = []
-
 [[apichannels.append(i),apicomments.append(i)] for i in apis]
 class APItimeoutError(Exception):
     pass
@@ -53,7 +52,7 @@ def apirequest(url):
             apis.append(api)
             apis.remove(api)
     raise APItimeoutError("APIがタイムアウトしました")
-     
+
 def apichannelrequest(url):
     global apichannels
     global max_time
@@ -100,11 +99,10 @@ def apicommentsrequest(url):
 def get_info(request):
     global version
     return json.dumps([version,os.environ.get('RENDER_EXTERNAL_URL'),str(request.scope["headers"]),str(request.scope['router'])[39:-2]])
-                
-    return [load_search(i) for i in t]
+    
 def get_data(videoid):
     global logs
-    t = json.loads(apirequest(r"/api/v1/videos/"+ urllib.parse.quote(videoid)))
+    t = json.loads(apirequest(r"api/v1/videos/"+ urllib.parse.quote(videoid)))
     return [{"id":i["videoId"],"title":i["title"],"authorId":i["authorId"],"author":i["author"]} for i in t["recommendedVideos"]],list(reversed([i["url"] for i in t["formatStreams"]]))[:2],t["descriptionHtml"].replace("\n","<br>"),t["title"],t["authorId"],t["author"],t["authorThumbnails"][-1]["url"]
 
 def get_search(q,page):
@@ -117,7 +115,7 @@ def get_search(q,page):
             return {"title":i["title"],"id":i["playlistId"],"thumbnail":i["videos"][0]["videoId"],"count":i["videoCount"],"type":"playlist"}
         else:
             if i["authorThumbnails"][-1]["url"].startswith("https"):
-                return {"author":i["author"],"id":i["authorId"],"thumbnail":i["authorThumbnails"][-1]["url"],"type":"channel"} 
+                return {"author":i["author"],"id":i["authorId"],"thumbnail":i["authorThumbnails"][-1]["url"],"type":"channel"}
             else:
                 return {"author":i["author"],"id":i["authorId"],"thumbnail":r"https://"+i["authorThumbnails"][-1]["url"],"type":"channel"}
     return [load_search(i) for i in t]
@@ -214,7 +212,8 @@ def search(tag:str,response: Response,request: Request,page:Union[int,None]=1,yu
     if not(check_cokie(yuki)):
         return redirect("/")
     return redirect(f"/search?q={tag}")
-    
+
+
 @app.get("/channel/{channelid}", response_class=HTMLResponse)
 def channel(channelid:str,response: Response,request: Request,yuki: Union[str] = Cookie(None),proxy: Union[str] = Cookie(None)):
     if not(check_cokie(yuki)):
