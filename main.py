@@ -189,24 +189,6 @@ def home(response: Response,request: Request,yuki: Union[str] = Cookie(None)):
         response.set_cookie("yuki","True",max_age=60 * 60 * 24 * 7)
         return template("home.html",{"request": request})
     return redirect("/blog")
-@app.get('/www', response_class=HTMLResponse)
-def video(v: str, request: Request):
-    videoid = v
-    t = getting_data(videoid)
-    print(t)
-    print(t[7])
-    return template('hiquo.html', {
-        "request": request,
-        "videoid": videoid,
-        "res": t[0],
-        "videourls": t[7],
-        "description": t[2],
-        "videotitle": t[3],
-        "authorid": t[4],
-        "authoricon": t[6],
-        "author": t[5],
-        "audioUrl": t[8],
-    })
     
 @app.get('/watch', response_class=HTMLResponse)
 def video(v:str,response: Response,request: Request,yuki: Union[str] = Cookie(None),proxy: Union[str] = Cookie(None)):
