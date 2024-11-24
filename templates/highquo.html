@@ -1,4 +1,4 @@
-<!DOCTYPE html>https://codepen.io/pen/
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8" />
@@ -28,7 +28,7 @@
     <header>
       <div class="banner">
         <button class="btn btn-link" onclick="window.location.href='/'">
-          ホーホーム
+          home
         </button>
         <form class="d-flex" action="/search" method="get">
           <input
@@ -54,7 +54,7 @@
         id="wakameVideo"
         controls
         autoplay
-        poster="{% if proxy == 'True' %}/thumbnail?v={{ videoid }}{% else %}https://img.youtube.com/vi/{{ videoid }}/0.jpg{% endif %}"
+        poster="{% if proxy == 'True' %}/thumbnail?v={{ videoid }}{% else %}https://i3.ytimg.com/vi/{{ videoid }}/default.jpg{% endif %}"
       >
         <source src="{{ videourls }}" type="video/mp4" />
         読み込み失敗。ブラウザをアップデートしてどうぞ。
