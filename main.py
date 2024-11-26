@@ -102,8 +102,13 @@ def get_info(request):
     
 def get_data(videoid):
     global logs
+    try:
     t = json.loads(apirequest(r"api/v1/videos/"+ urllib.parse.quote(videoid)))
     return [{"id":i["videoId"],"title":i["title"],"authorId":i["authorId"],"author":i["author"]} for i in t["recommendedVideos"]],list(reversed([i["url"] for i in t["formatStreams"]]))[:2],t["descriptionHtml"].replace("\n","<br>"),t["title"],t["authorId"],t["author"],t["authorThumbnails"][-1]["url"]
+        except (APItimeoutError, json.JSONDecodeError) as e:
+        print(f"データ取得に失敗しました: {e}")
+        # たぶん普通はinvidiousから取得したほうが早いからgetting_dataは失敗したときに行われるのがいいと思う
+        return getting_data(videoid)
 
 def getting_data(videoid):
     urls = [
