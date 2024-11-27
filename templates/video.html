@@ -55,8 +55,8 @@
             <div class="h-box">
                 <h1>{{ videotitle }}</h1>
             </div>
-@@ -68,91 +55,304 @@ <h1>{{ videotitle }}</h1>
-                        href="javascript:{navigator.share({title: '動画を共有',text: '{{videotitle}}',url: location.href,})}">動画を共有</a><br>
+<h1>{{ videotitle }}</h1>
+  <a href="javascript:{navigator.share({title: '動画を共有',text: '{{videotitle}}',url: location.href,})}">動画を共有</a><br>
                     <hr>
                 </div>
                 <div class="pure-u-1 pure-u-lg-3-5">
@@ -91,7 +91,39 @@
         </div>
     </div>
     <div class="pure-u-1 pure-u-md-2-24"></div>
-    <script>
+                <div class="pure-u-1 pure-u-lg-3-5">
+                    <div class="h-box">
+                        <a href="/channel/{{authorid}}" style="display:block;width:fit-content;width:-moz-fit-content">
+                            <div class="channel-profile">
+                                <img src="{{authoricon}}">
+                                <span id="channel-name">{{ author }}</span>
+                            </div>
+                        </a>
+                        <div id="description-box">
+                            <div id="descriptionWrapper">{{ description | safe}}</div>
+                        </div>
+                        <hr>
+                        <div id="comments">
+                        </div>
+                    </div>
+                </div>
+                <div class="pure-u-1 pure-u-lg-1-5">
+                    <!--自動再生<input type="checkbox" id="autonext" onchange="checkautoplay()"><br>-->
+                    ループ再生<input type="checkbox" id="loop" onchange="changeloop()">
+                    {% for re in res %}
+                    <a href="/watch?v={{ re['id'] }}">
+                        <div class="thumbnail">
+                            <img loading="lazy" class="thumbnail" src="{% if proxy == "True" %}/thumbnail?v={{ re['id']}}{% else %}https://i.ytimg.com/vi/{{ re['id'] }}/maxresdefault.jpg{% endif %}">
+                        </div>
+                        <p style="width:100%">{{re["title"]}}</p>
+                    </a><br>
+                    <a href="/channel/{{re['authorId']}}">{{re["author"]}}</a>{% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pure-u-1 pure-u-md-2-24"></div>
+<script>
         document.cookie = "yuki=True;max-age=2592000;";
         function getCookie(name) { let matches = document.cookie.match(new RegExp("(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)")); return matches ? decodeURIComponent(matches[1]) : undefined; }
         //document.getElementById("autonext").checked = getCookie("autonext");
@@ -108,6 +140,7 @@
         xhr.onload = function () {
             if (xhr.status != 500) {
                 document.getElementById('comments').innerHTML = xhr.responseText;
+            }
             else { document.getElementById('comments').innerHTML = "エラーが発生しました。再読み込みを試してください"; }
         };
         xhr.send();
@@ -122,6 +155,8 @@
                 } else {
                     v.pause();
                 }
+            }
+        }
     </script>
     <script>$('#searchbox').autocomplete({
             source: function (request, response) {
@@ -137,9 +172,4 @@
             }, delay: 300
         });</script>
 </body>
-</html>
-    });
-  });
-    </script>
-  </body>
 </html>
