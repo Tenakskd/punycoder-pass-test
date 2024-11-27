@@ -1,0 +1,245 @@
+.related-videos-title{
+      color: #777777;
+      font-size: 0.8em;
+}
+.Padding{
+      margin-top:1.5px;
+}
+
+      .ui-helper-hidden-accessible {
+        color: #fff;
+      }
+      
+      body {
+            background-color: white;
+        }
+      
+      #author-icon {
+        width: 28px !important;
+        height: 28px !important;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      #channel-name {
+        font-size: 20px;
+      }
+
+      a {
+        text-decoration: none;
+        color: #333;
+      }
+
+      #comments .channel-profile img {
+        width: 32px !important;
+        height: 32px !important;
+        border-radius: 50% !important;
+        object-fit: cover;
+        margin-right: 0.5em !important;
+        margin-top: 0.5em !important;
+      }
+
+      .pure-u-4-24,
+      .pure-u-md-2-24 {
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 34px !important;
+        height: 34px !important;
+      }
+
+      #1wiet {
+        color: #fff;
+      }
+      .video-player-area-a {
+        max-height: 45%;
+      }
+      .sidebar a {
+        color: transparent;
+        text-decoration: none;
+      }
+      .comments a {
+        font-size: 13px;
+        color: #4c4c4c;
+        text-decoration: none;
+      }
+
+      .navbar {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 5%;
+        background-color: #ffffff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .navbar-logo img {
+        width: 50px;
+        height: auto;
+      }
+      .navbar-search {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50%;
+      }
+      .navbar-search form {
+        width: 100%;
+      }
+      .navbar-search input[type="search"] {
+        width: 100%;
+        padding: 8px 16px;
+        border: 1px solid #ccc;
+        border-radius: 20px;
+        font-size: 1em;
+        outline: none;
+      }
+      #contents {
+        display: flex;
+        padding: 20px 5%;
+      }
+      #player-container {
+        flex: 3;
+        padding: 10px;
+        width: 100%;
+        text-align: left;
+      }
+      #player {
+        max-height: 45%;
+        width: 100%;
+        height: auto;
+        outline: none;
+        border-radius: 10px;
+      }
+      .sidebar {
+        max-width: 25%;
+        flex: 1;
+        padding: 10px;
+        margin-top: 20px;
+      }
+      .thumbnail {
+        display: flex;
+        align-items: center;
+        margin-bottom: 5px;
+      }
+      .thumbnail img {
+    width: calc(35% + 5px); /* 現在の幅に5pxを追加 */
+    margin-right: 10px;
+    border-radius: 10px;
+}
+
+      .thumbnail-text {
+        display: flex;
+        flex-direction: column;
+      }
+      .thumbnail-text .title {
+        font-size: 1em;
+        color: #333;
+        margin: 0;
+        white-space: normal;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        max-width: 100%;
+      }
+      .thumbnail-text .channel-name {
+        font-size: 0.8em;
+        color: #696363;
+        margin-top: 4px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .video-info {
+        font-size: 0.75em;
+        color: #999;
+        margin-top: 2px;
+      }
+      /* 動画説明のスタイル */
+      .video-description {
+        margin-top: 10px;
+        font-size: 0.9em;
+        color: #000000;
+        white-space: pre-wrap;
+      }
+
+      /* コメントセクションのスタイル */
+      #comments {
+        margin-top: 20px;
+        padding: 10px;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .comment {
+        margin-bottom: 15px;
+        padding: 10px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      }
+      /* コメントのauthor */
+      .comment .comment-author {
+        font-weight: bold;
+        color: #333;
+      }
+      /* コメント */
+      .comment .comment-text {
+        margin-top: 5px;
+        color: #555;
+      }
+      /* 日付 */
+      .comment .comment-date {
+        font-size: 0.8em;
+        color: #999;
+      }
+
+      @media (max-width: 1024px) {
+        #player-container {
+          max-width: 100%;
+          padding: 10px 0;
+        }
+        .navbar-logo img {
+          width: 8%;
+        }
+        .navbar-search form {
+          width: 80%;
+        }
+        .thumbnail img {
+          width: 40%;
+        }
+        .sidebar {
+          margin-left: 0;
+        }
+      }
+      @media (max-width: 768px) {
+        #contents {
+          flex-direction: column;
+        }
+        .navbar-search form {
+          width: 90%;
+        }
+        .sidebar {
+          margin-top: 10px;
+        }
+      }
+      .ui-autocomplete {
+        list-style: none; /* リストのスタイルをなしにする */
+        padding: 0; /* パディングをリセット */
+        margin: 0; /* マージンをリセット */
+        background-color: white; /* 背景色を白にする */
+        z-index: 1000; /* 他の要素の上に表示するためのz-index */
+        position: absolute; /* 絶対位置にする */
+      }
+
+      /* 各アイテムのスタイル */
+      .ui-menu-item {
+        padding: 8px; /* アイテムのパディングを設定 */
+      }
+
+      /* アイテムにホバーしたときのスタイル */
+      .ui-menu-item:hover {
+        background-color: #f0f0f0; /* ホバー時の背景色 */
+      }
