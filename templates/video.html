@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <link rel="icon" href="https://m.youtube.com/static/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="https://m.youtube.com/static/apple-touch-icon-180x180-precomposed.png" sizes="180x180">
@@ -25,6 +26,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
+
 <body class="no-theme">
     <span style="display:none" id="dark_mode_pref"></span>
     <div class="pure-g">
@@ -32,6 +34,7 @@
         <div class="pure-u-1 pure-u-md-20-24" id="contents">
             <div class="pure-g navbar h-box">
                 <div class="pure-u-1 pure-u-md-12-24 searchbar">
+
                     <a href="/requestform">新機能の要望やバグ報告</a><br>
                     <a href="/bbs">掲示板</a>
                     <form class="pure-form" action="/search" method="get">
@@ -43,7 +46,7 @@
                 </div>
             </div>
             <div id="player-container" class="h-box">
-                <video style="outline:none;width:100%;background-color:#000;" playsinline="" poster="{% if proxy == "True" %}/thumbnail?v={{ videoid }}{% else %}https://i.ytimgz.com/vi/{{ videoid }}/default.jpg{% endif
+                <video style="outline:none;width:100%;background-color:#000;" playsinline="" poster="{% if proxy == "True" %}/thumbnail?v={{ videoid }}{% else %}https://img.youtube.com/vi/{{ videoid }}/0.jpg{% endif
                     %}" id="player" class="on-video_player video-js player-style-invidious" controls=""
                     loadedmetadata="settime()" loop="">
                     {% for videourl in videourls%}
@@ -55,15 +58,23 @@
             <div class="h-box">
                 <h1>{{ videotitle }}</h1>
             </div>
-<h1>{{ videotitle }}</h1>
-  <a href="javascript:{navigator.share({title: '動画を共有',text: '{{videotitle}}',url: location.href,})}">動画を共有</a><br>
+            <div class="pure-g">
+                <div class="pure-u-1 pure-u-lg-1-5">
+                    <a href="{{ videourls[0] }}" target="_blank">ダウンロード</a><br>
+                    <a
+                        href="javascript:{navigator.share({title: '動画を共有',text: '{{videotitle}}',url: location.protocol+'//'+document.domain+'/watch?v={{ videoid }}'+'&t='+Math.floor(document.getElementById('player').currentTime),})}">現時点の動画を共有</a><br>
+                    <a
+                        href="javascript:{navigator.share({title: '動画を共有',text: '{{videotitle}}',url: location.href,})}">動画を共有</a><br>
                     <hr>
+                    <a href="/www?v={{ videoid }}" target="_blank">ダウンロード</a>
                 </div>
                 <div class="pure-u-1 pure-u-lg-3-5">
                     <div class="h-box">
                         <a href="/channel/{{authorid}}" style="display:block;width:fit-content;width:-moz-fit-content">
                             <div class="channel-profile">
+
                                 <img src="{{authoricon}}">
+
                                 <span id="channel-name">{{ author }}</span>
                             </div>
                         </a>
@@ -80,8 +91,9 @@
                     ループ再生<input type="checkbox" id="loop" onchange="changeloop()">
                     {% for re in res %}
                     <a href="/watch?v={{ re['id'] }}">
+
                         <div class="thumbnail">
-                            <img loading="lazy" class="thumbnail" src="{% if proxy == "True" %}/thumbnail?v={{ re['id']}}{% else %}https://i.ytimg.com/vi/{{ re['id'] }}/maxresdefault.jpg{% endif %}">
+                            <img loading="lazy" class="thumbnail" src="{% if proxy == "True" %}/thumbnail?v={{ re['id']}}{% else %}https://img.youtube.com/vi/{{ re['id'] }}/0.jpg{% endif %}">
                         </div>
                         <p style="width:100%">{{re["title"]}}</p>
                     </a><br>
@@ -91,39 +103,7 @@
         </div>
     </div>
     <div class="pure-u-1 pure-u-md-2-24"></div>
-                <div class="pure-u-1 pure-u-lg-3-5">
-                    <div class="h-box">
-                        <a href="/channel/{{authorid}}" style="display:block;width:fit-content;width:-moz-fit-content">
-                            <div class="channel-profile">
-                                <img src="{{authoricon}}">
-                                <span id="channel-name">{{ author }}</span>
-                            </div>
-                        </a>
-                        <div id="description-box">
-                            <div id="descriptionWrapper">{{ description | safe}}</div>
-                        </div>
-                        <hr>
-                        <div id="comments">
-                        </div>
-                    </div>
-                </div>
-                <div class="pure-u-1 pure-u-lg-1-5">
-                    <!--自動再生<input type="checkbox" id="autonext" onchange="checkautoplay()"><br>-->
-                    ループ再生<input type="checkbox" id="loop" onchange="changeloop()">
-                    {% for re in res %}
-                    <a href="/watch?v={{ re['id'] }}">
-                        <div class="thumbnail">
-                            <img loading="lazy" class="thumbnail" src="{% if proxy == "True" %}/thumbnail?v={{ re['id']}}{% else %}https://i.ytimg.com/vi/{{ re['id'] }}/maxresdefault.jpg{% endif %}">
-                        </div>
-                        <p style="width:100%">{{re["title"]}}</p>
-                    </a><br>
-                    <a href="/channel/{{re['authorId']}}">{{re["author"]}}</a>{% endfor %}
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="pure-u-1 pure-u-md-2-24"></div>
-<script>
+    <script>
         document.cookie = "yuki=True;max-age=2592000;";
         function getCookie(name) { let matches = document.cookie.match(new RegExp("(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)")); return matches ? decodeURIComponent(matches[1]) : undefined; }
         //document.getElementById("autonext").checked = getCookie("autonext");
@@ -146,9 +126,11 @@
         xhr.send();
         if (document.domain != "yukigennumber.ddo.jp") { document.getElementById("ads_box").innerHTML = ""; }
         document.getElementById("player").style.maxHeight = document.documentElement.clientHeight * 0.8 + "px";
+
         document.onkeydown = keydown;
         function keydown(key) {
             var v = document.getElementById("player");
+
             if (key.keyCode == 32 || key.keyCode == 75) {
                 if (v.paused == true) {
                     v.play();
@@ -172,4 +154,5 @@
             }, delay: 300
         });</script>
 </body>
+
 </html>
