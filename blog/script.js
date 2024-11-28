@@ -1,10 +1,10 @@
-document.getElementById('accept-btn').addEventListener('click', function() {
+document.getElementById('YES').addEventListener('click', function() {
     document.cookie = "yuki=True; max-age=31536000; path=/";
     location.href = "/";
     return;
 });
 
-document.getElementById('reject-btn').addEventListener('click', function() {
+document.getElementById('NO').addEventListener('click', function() {
     hideCookieNotice();
     localStorage.setItem('cookieAccepted', 'false');
 });
