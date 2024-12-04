@@ -1,0 +1,48 @@
+body {
+  font-family: system-ui, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #64a5de;
+}
+
+header {
+  background-color: #183185;
+  color: white;
+  text-align: center;
+  padding: 1em 0;
+}
+
+nav {
+  background: #d6c100;
+  color: black;
+  padding: 1em;
+  text-align: center;
+}
+
+nav a {
+  color: white;
+  margin: 0 31px;
+  text-decoration: none;
+}
+
+main {
+  padding: 44px;
+}
+
+.topic {
+  background: white;
+  margin: 19px 0;
+  padding: 14px;
+  border-radius: 6px;
+  box-shadow: 0 0 11px rgba(0, 0, 0, 0.1);
+}
+
+footer {
+  background: #00a6e8;
+  color: white;
+  text-align: center;
+  padding: 0.5em 0;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
