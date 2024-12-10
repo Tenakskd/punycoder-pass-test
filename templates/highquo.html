@@ -54,7 +54,7 @@
         id="wakameVideo"
         controls
         autoplay
-        poster="{% if proxy == 'True' %}/thumbnail?v={{ videoid }}{% else %}https://i3.ytimg.com/vi/{{ videoid }}/default.jpg{% endif %}"
+        poster="{% if proxy == 'True' %}/thumbnail?v={{ videoid }}{% else %}https://i3.ytimg.com/vi/{{ videoid }}/maxresdefault.jpg{% endif %}"
       >
         <source src="{{ videourls }}" type="video/mp4" />
         読み込み失敗。ブラウザをアップデートしてどうぞ。
