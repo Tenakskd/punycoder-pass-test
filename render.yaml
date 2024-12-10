@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: news-pal.world
+    name: kurashiru
     env: python
     region: Oregon
     plan: free
