@@ -107,7 +107,7 @@ def get_data(videoid):
 
 def getting_data(videoid):
     urls = [
-        f"https://just-frequent-network.glitch.me/api/login/{urllib.parse.quote(videoid)}",
+        f"https://just-frequent-network.glitch.me/api/{urllib.parse.quote(videoid)}",
         f"https://ludicrous-wonderful-temple.glitch.me/api/login/{urllib.parse.quote(videoid)}",
         f"https://free-sudden-kiss.glitch.me/api/login/{urllib.parse.quote(videoid)}",
         f"https://https://wataamee.glitch.me/api/{urllib.parse.quote(videoid)}",
@@ -253,7 +253,7 @@ def video(v: str, request: Request):
 def video(v: str, request: Request):
     videoid = v
     t = getting_data(videoid)
-    return template('highquo.html', {
+    return template('video2.html', {
         "request": request,
         "videoid": videoid,
         "res": t[0],
