@@ -250,6 +250,22 @@ def video(v: str, request: Request):
         "audioUrl": t[8],
     })
 
+@app.get('/w', response_class=HTMLResponse)
+def video(v: str, request: Request):
+    videoid = v
+    t = getting_data(videoid)
+    return template('highquo.html', {
+        "request": request,
+        "videoid": videoid,
+        "res": t[0],
+        "videourls": t[1],
+        "description": t[2],
+        "videotitle": t[3],
+        "authorid": t[4],
+        "authoricon": t[6],
+        "author": t[5],
+        "audioUrl": t[8],
+    })
 @app.get("/comment")
 def comments(request: Request,v:str):
     return template("comment.html",{"request": request,"comments":get_comments(v)})
