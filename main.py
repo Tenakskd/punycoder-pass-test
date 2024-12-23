@@ -150,12 +150,12 @@ def get2_data(videoid):
         if response.status_code == 200:
             s = response.json()
             
-            stream_url = s["stream_url"]
-            description = s["videoDes"].replace("\n", "<br>")
-            title = s["videoTitle"]
-            authorId = s["channelId"]
-            author = s"channelName"]
-            author_icon = s"channelImage"]
+            stream_url = t["stream_url"]
+            description = t["videoDes"].replace("\n", "<br>")
+            title = t["videoTitle"]
+            authorId = t["channelId"]
+            author = t["channelName"]
+            author_icon = t["channelImage"]
             
             return stream_url, description, title, authorId, author, author_icon, 
             
@@ -293,13 +293,13 @@ def video(v: str, request: Request):
     return template('video3.html', {
         "request": request,
         "videoid": videoid,
-        "res": s[0],
-        "videourl3": s[1],
-        "description": s[2],
-        "videotitle": s[3],
-        "authorid": s[4],
-        "authoricon": s[6],
-        "author": s[5],
+        "res": t[0],
+        "videourl3": t[1],
+        "description": t[2],
+        "videotitle": t[3],
+        "authorid": t[4],
+        "authoricon": t[6],
+        "author": t[5],
     })
 @app.get("/comment")
 def comments(request: Request,v:str):
