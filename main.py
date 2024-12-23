@@ -287,20 +287,15 @@ def video(v: str, request: Request):
         "audioUrl": t[8],
     })
 @app.get('/ww', response_class=HTMLResponse)
-def video(v: str, request: Request):
+def video(v:str,response: Response,request: Request,yuki: Union[str] = Cookie(None),proxy: Union[str] = Cookie(None)):
+    if not(check_cokie(yuki)):
+        return redirect("/")
+    response.set_cookie(key="yuki", value="True",max_age=7*24*60*60)
     videoid = v
-    s = get2_data(videoid)
-    return template('video3.html', {
-        "request": request,
-        "videoid": videoid,
-        "res": t[0],
-        "videourl3": t[1],
-        "description": t[2],
-        "videotitle": t[3],
-        "authorid": t[4],
-        "authoricon": t[6],
-        "author": t[5],
-    })
+    t = get2_data(videoid)
+    response.set_cookie("yuki","True",max_age=60 * 60 * 24 * 7)
+    return template('video3.html', {"request": request,"videoid":videoid,"videourl3":t[1],"res":t[0],"description":t[2],"videotitle":t[3],"authorid":t[4],"authoricon":t[6],"author":t[5],"proxy":proxy})
+
 @app.get("/comment")
 def comments(request: Request,v:str):
     return template("comment.html",{"request": request,"comments":get_comments(v)})
