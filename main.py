@@ -140,6 +140,25 @@ def getting_data(videoid):
             audioUrl = t["audioUrl"]
             
             return recommended_videos, stream_url, description, title, authorId, author, author_icon, highstreamUrl, audioUrl
+            
+def get2_data(videoid):
+    urls = [
+        u"https://butternut-petite-makemake.glitch.me/api/{urllib.parse.quote(videoid)}"
+    ]
+    for url in urls:
+        response = requests.get(url)
+        if response.status_code == 200:
+            s = response.json()
+            
+            stream_url = s["stream_url"]
+            description = s["videoDes"].replace("\n", "<br>")
+            title = s["videoTitle"]
+            authorId = s["channelId"]
+            author = s"channelName"]
+            author_icon = s"channelImage"]
+            
+            return stream_url, description, title, authorId, author, author_icon, 
+            
 
 
 def get_search(q,page):
@@ -266,6 +285,21 @@ def video(v: str, request: Request):
         "authoricon": t[6],
         "author": t[5],
         "audioUrl": t[8],
+    })
+@app.get('/ww', response_class=HTMLResponse)
+def video(v: str, request: Request):
+    videoid = v
+    s = getting_data(videoid)
+    return template('video3.html', {
+        "request": request,
+        "videoid": videoid,
+        "res": s[0],
+        "videourl3": s[1],
+        "description": s[2],
+        "videotitle": s[3],
+        "authorid": s[4],
+        "authoricon": s[6],
+        "author": s[5],
     })
 @app.get("/comment")
 def comments(request: Request,v:str):
