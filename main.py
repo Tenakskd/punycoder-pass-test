@@ -289,7 +289,7 @@ def video(v: str, request: Request):
 @app.get('/ww', response_class=HTMLResponse)
 def video(v: str, request: Request):
     videoid = v
-    s = getting_data(videoid)
+    s = get2_data(videoid)
     return template('video3.html', {
         "request": request,
         "videoid": videoid,
