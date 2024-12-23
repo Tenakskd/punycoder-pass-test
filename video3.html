@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <title>Menu</title>
+<link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Tenakskd/punycoder-pass-test/refs/heads/main/templates/IMG_0305.png">
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/Tenakskd/punycoder-pass-test/refs/heads/main/templates/IMG_0305.png" type="image/png">
+    <link rel="apple-touch-icon" sizes="256x256" href="https://raw.githubusercontent.com/Tenakskd/punycoder-pass-test/refs/heads/main/templates/IMG_0305.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://raw.githubusercontent.com/Tenakskd/punycoder-pass-test/refs/heads/main/templates/IMG_0305.png">
+    <link rel="apple-touch-icon" sizes="32x32" href="https://raw.githubusercontent.com/Tenakskd/punycoder-pass-test/refs/heads/main/templates/IMG_0305.png">
+    <link rel="apple-touch-icon" sizes="16x16" href="https://raw.githubusercontent.com/Tenakskd/punycoder-pass-test/refs/heads/main/templates/IMG_0305.png">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="/css/empty.css">
+    <link rel="stylesheet" href="/css/pure-min.css">
+    <link rel="stylesheet" href="/css/grids-responsive-min.css">
+    <link rel="stylesheet" href="/css/ionicons.min.css">
+    <link rel="stylesheet" href="/css/default.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+
+  <body>
+    <header>
+      <div class="banner">
+        <button class="btn btn-link" onclick="window.location.href='/'">
+          home
+        </button>
+        <form class="d-flex" action="/search" method="get">
+          <input
+            id="searchbox"
+            name="q"
+            class="form-control"
+            type="text"
+            placeholder="キーワードを入力..."
+            aria-label="Search"
+            required
+          />
+        </form>
+      </div>
+    </header>
+    <div class="card">
+      <div class="loading-indicator">
+        <img
+          src="https://cdn.glitch.global/3128bf45-3a23-4695-81ba-3aba21b8585b/IMG_1966.gif?v=1729824394361"
+          alt="Loading..."
+        />
+      </div>
+      <video
+        id="wakameVideo"
+        controls
+        autoplay
+        poster="{% if proxy == 'True' %}/thumbnail?v={{ videoid }}{% else %}https://i3.ytimg.com/vi/{{ videoid }}/0.jpg{% endif %}"
+      >
+        <source src="{{ videourl3 }}" type="video/mp4" />
+        読み込み失敗。ブラウザをアップデートしてどうぞ。
+      </video>
+    </div>
+    <div class="card">
+      <div class="toolcard-header"></div>
+      <div class="toolcard-header">
+        <small class="text-muted"></small>
+        <small class="text-muted float-right"
+          ><button id="reloadButton">動画を再読み込み</button></small
+        >
+      </div>
+      <div class="card-channel">
+        <div class="container">
+          <a href="/channel/{{authorid}}">
+            <img src="{{authoricon}}" alt="画像" />
+            {{ author }}
+          </a>
+        </div>
+      </div>
+      <div class="card-body">
+        <h4>{{ videotitle }}</h4>
+        <p>{{ description | safe}}</p>
+      </div>
+    </div>
+    <div class="comment-box">
+      <h2>コメント</h2>
+  <iframe src="https://wakamecomment.glitch.me/wakame/{{ videoid }}" scrolling="yes"></iframe>
+      </div>
+    </div>
+    <br />
+    <style>
+      * {
+        --plyr-color-main: #ff8181;
+      }
+      a {
+        color: #ff8181;
+      }
+      .card {
+        border: 1px solid #ccc;
+        border-radius: 15px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        margin: 10px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+      }
+      .card:hover {
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      }
+      .card-header,
+      .card-footer {
+        background-color: #f8f9fa;
+        padding: 10px 15px;
+        border-bottom: 1px solid #ddd;
+      }
+      .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .card-channel {
+        padding: 7px;
+        height: 49px;
+      }
+      .card-channel p {
+        margin-left: 65px;
+      }
+      .card-body {
+        padding: 15px;
+      }
+      .card-body h5 {
+        margin-bottom: 10px;
+      }
+      .card-body p {
+        margin: 0;
+        white-space: pre-line;
+      }
+      video {
+        width: 100%;
+        height: 100%;
+      }
+      .card-title h4 {
+        font-size: 1.6rem;
+        color: #333;
+        margin: 10px 0;
+      }
+      .card-title .container {
+        padding: 0 15px;
+      }
+    .toolcard-header {
+        background-color: #fff5f7;
+        padding: 10px 10px;
+        border-bottom: 0.5px solid #f8e58c;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 30px;
+      }
+      .container {
+        height: 35px;
+        display: flex;
+        align-items: center;
+      }
+      .container img {
+        width: 35px;
+        height: 35px;
+      }
+      .container .text {
+        margin-left: 10px;
+      }
+      .comment-box {
+        background-color: #ffffff;
+        width: 85%;
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        text-align: left;
+        box-sizing: border-box;
+      }
+      .comment-box h2 {
+        margin: 0 0 10px;
+        font-size: 24px;
+        color: #333;
+      }
+      .iframe-container {
+        width: 100%;
+        height: 900px;
+        border: none;
+        overflow: hidden;
+        border-radius: 10px;
+        box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+      iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+      .tube-box {
+        background-color: #ffffff;
+        width: 100%;
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        text-align: left;
+        box-sizing: border-box;
+      }
+      .video-container {
+        position: relative;
+      }
+      .loading-indicator {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: none;
+        z-index: 10;
+      }
+      .loading-indicator img {
+        width: 75px;
+        height: 75px;
+      }
+    </style>
+    <script>
+      const video = document.getElementById("wakameVideo");
+      const syncButton = document.getElementById("syncButton");
+      video.addEventListener("loadedmetadata", () => {
+        video.play().catch((error) => {
+          console.error("動画の再生エラー:", error);
+        });
+      });
+      });
+      video.addEventListener("pause", () => {
+        audio.pause();
+      });
+
+      video.addEventListener("ended", () => {
+        audio.pause();
+        audio.currentTime = 0;
+      });
+syncButton.addEventListener("click", () => {
+        video.pause();
+        audio.pause();
+        audio.currentTime = video.currentTime;
+      });
+      document
+        .getElementById("reloadButton")
+        .addEventListener("click", function () {
+          const video = document.getElementById("wakameVideo");
+          const audio = document.getElementById("audio");
+          video.load();
+          audio.load();
+        });
+    </script>
+  </body>
+</html>
