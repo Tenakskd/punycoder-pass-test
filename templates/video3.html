@@ -7,7 +7,7 @@
       content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
     />
     <title>Menu</title>
-<link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Tenakskd/punycoder-pass-test/refs/heads/main/templates/IMG_0305.png">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Tenakskd/punycoder-pass-test/refs/heads/main/templates/IMG_0305.png">
     <link rel="shortcut icon" href="https://raw.githubusercontent.com/Tenakskd/punycoder-pass-test/refs/heads/main/templates/IMG_0305.png" type="image/png">
     <link rel="apple-touch-icon" sizes="256x256" href="https://raw.githubusercontent.com/Tenakskd/punycoder-pass-test/refs/heads/main/templates/IMG_0305.png">
     <link rel="apple-touch-icon" sizes="180x180" href="https://raw.githubusercontent.com/Tenakskd/punycoder-pass-test/refs/heads/main/templates/IMG_0305.png">
@@ -83,8 +83,8 @@
     </div>
     <div class="comment-box">
       <h2>コメント</h2>
-  <iframe src="https://wakamecomment.glitch.me/wakame/{{ videoid }}" scrolling="yes"></iframe>
-      </div>
+      <iframe src="https://wakamecomment.glitch.me/wakame/{{ videoid }}" scrolling="yes"></iframe>
+    </div>
     </div>
     <br />
     <style>
@@ -145,7 +145,7 @@
       .card-title .container {
         padding: 0 15px;
       }
-    .toolcard-header {
+      .toolcard-header {
         background-color: #fff5f7;
         padding: 10px 10px;
         border-bottom: 0.5px solid #f8e58c;
@@ -220,33 +220,17 @@
     </style>
     <script>
       const video = document.getElementById("wakameVideo");
-      const syncButton = document.getElementById("syncButton");
       video.addEventListener("loadedmetadata", () => {
         video.play().catch((error) => {
           console.error("動画の再生エラー:", error);
         });
       });
-      });
-      video.addEventListener("pause", () => {
-        audio.pause();
-      });
 
-      video.addEventListener("ended", () => {
-        audio.pause();
-        audio.currentTime = 0;
-      });
-syncButton.addEventListener("click", () => {
-        video.pause();
-        audio.pause();
-        audio.currentTime = video.currentTime;
-      });
       document
         .getElementById("reloadButton")
         .addEventListener("click", function () {
           const video = document.getElementById("wakameVideo");
-          const audio = document.getElementById("audio");
           video.load();
-          audio.load();
         });
     </script>
   </body>
