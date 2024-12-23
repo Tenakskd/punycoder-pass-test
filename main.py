@@ -290,7 +290,7 @@ def video(v: str, request: Request):
 def video(v: str, request: Request):
     videoid = v
     t = get2_data(videoid)
-    return template('video2.html', {
+    return template('video3.html', {
         "request": request,
         "videoid": videoid,
         "res": t[0],
@@ -300,7 +300,6 @@ def video(v: str, request: Request):
         "authorid": t[4],
         "authoricon": t[6],
         "author": t[5],
-        "audioUrl": t[8],
     })
 @app.get("/comment")
 def comments(request: Request,v:str):
