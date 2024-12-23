@@ -143,7 +143,7 @@ def getting_data(videoid):
             
 def get2_data(videoid):
     urls = [
-        u"https://butternut-petite-makemake.glitch.me/api/{urllib.parse.quote(videoid)}"
+        f"https://butternut-petite-makemake.glitch.me/api/{urllib.parse.quote(videoid)}"
     ]
     for url in urls:
         response = requests.get(url)
