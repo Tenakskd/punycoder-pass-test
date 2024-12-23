@@ -1,155 +1,253 @@
 <!DOCTYPE html>
-<html lang="ja">
-
-<head>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <title>Menu</title>
 <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Tenakskd/punycoder-pass-test/refs/heads/main/templates/IMG_0305.png">
     <link rel="shortcut icon" href="https://raw.githubusercontent.com/Tenakskd/punycoder-pass-test/refs/heads/main/templates/IMG_0305.png" type="image/png">
     <link rel="apple-touch-icon" sizes="256x256" href="https://raw.githubusercontent.com/Tenakskd/punycoder-pass-test/refs/heads/main/templates/IMG_0305.png">
     <link rel="apple-touch-icon" sizes="180x180" href="https://raw.githubusercontent.com/Tenakskd/punycoder-pass-test/refs/heads/main/templates/IMG_0305.png">
     <link rel="apple-touch-icon" sizes="32x32" href="https://raw.githubusercontent.com/Tenakskd/punycoder-pass-test/refs/heads/main/templates/IMG_0305.png">
     <link rel="apple-touch-icon" sizes="16x16" href="https://raw.githubusercontent.com/Tenakskd/punycoder-pass-test/refs/heads/main/templates/IMG_0305.png">
-    <link rel="shortcut icon" href="https://www.youtube.com/s/desktop/daa4e47c/img/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="https://www.youtube.com/s/desktop/daa4e47c/img/favicon_48x48.png" sizes="48x48">
-    <link rel="icon" href="https://www.youtube.com/s/desktop/daa4e47c/img/favicon_96x96.png" sizes="96x96">
-    <link rel="icon" href="https://www.youtube.com/s/desktop/daa4e47c/img/favicon_144x144.png" sizes="144x144">
-    <title>Error 404 Not Found</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="/css/empty.css">
     <link rel="stylesheet" href="/css/pure-min.css">
     <link rel="stylesheet" href="/css/grids-responsive-min.css">
     <link rel="stylesheet" href="/css/ionicons.min.css">
     <link rel="stylesheet" href="/css/default.css">
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 
-<body class="no-theme">
-    <span style="display:none" id="dark_mode_pref"></span>
-    <div class="pure-g">
-        <div class="pure-u-1 pure-u-md-2-24"></div>
-        <div class="pure-u-1 pure-u-md-20-24" id="contents">
-            <div class="pure-g navbar h-box">
-                <div class="pure-u-1 pure-u-md-12-24 searchbar">
-
-                    <a href="/">ホーム</a><br>
-                    <a href="/bbs">掲示板</a>
-                    <form class="pure-form" action="/search" method="get">
-                        <fieldset>
-                            <input type="search" id="searchbox" autocomplete="on" autocorrect="on" autocapitalize="none"
-                                spellcheck="false" name="q" placeholder="検索" title="検索" value="">
-                        </fieldset>
-                    </form>
-                </div>
-            </div>
-            <div id="player-container" class="h-box">
-                <video style="outline:none;width:100%;background-color:#000;" playsinline="" poster="{% if proxy == "True" %}/thumbnail?v={{ videoid }}{% else %}https://i.ytimg.com/vi/{{ videoid }}/0.jpg{% endif
-                    %}" id="player" class="on-video_player video-js player-style-invidious" controls=""
-                    loadedmetadata="settime()" loop="">
-                    {% for videourl in videourls%}
-                    <source src="{{videourl3}}">
-                    {% endfor %}
-                </video>
-                </video>
-            </div>
-            <div class="h-box">
-                <h1>{{ videotitle }}</h1>
-            </div>
-            <div class="pure-g">
-                <div class="pure-u-1 pure-u-lg-1-5">
-                    <a href="{{ videourl[0] }}" target="_blank">ダウンロード</a><br>
-                    <a
-                        href="javascript:{navigator.share({title: '動画を共有',text: '{{videotitle}}',url: location.protocol+'//'+document.domain+'/watch?v={{ videoid }}'+'&t='+Math.floor(document.getElementById('player').currentTime),})}">現時点の動画を共有</a><br>
-                    <a
-                        href="javascript:{navigator.share({title: '動画を共有',text: '{{videotitle}}',url: location.href,})}">動画を共有</a><br>
-                    <hr>
-                    <a href="/www?v={{ videoid }}" >高画質で再生(不安定、テスト中)</a><br>
-                    <a href="/w?v={{ videoid }}" >サーバー1(不安定、テスト中)</a><br>
-                    <a href="/watch?v={{ videoid }}" >本サーバー(不安定、テスト中)</a>
-                </div>
-                <div class="pure-u-1 pure-u-lg-3-5">
-                    <div class="h-box">
-                        <a href="/channel/{{authorid}}" style="display:block;width:fit-content;width:-moz-fit-content">
-                            <div class="channel-profile">
-
-                                <img src="{{authoricon}}">
-
-                                <span id="channel-name">{{ author }}</span>
-                            </div>
-                        </a>
-                        <div id="description-box">
-                            <div id="descriptionWrapper">{{ description | safe}}</div>
-                        </div>
-                        <hr>
-                        <div id="comments">
-                        </div>
-                    </div>
-                </div>
-                <div class="pure-u-1 pure-u-lg-1-5">
-                    <!--自動再生<input type="checkbox" id="autonext" onchange="checkautoplay()"><br>-->
-                    ループ再生<input type="checkbox" id="loop" onchange="changeloop()">
-                    {% for re in res %}
-                    <a href="/watch?v={{ re['id'] }}">
-
-                        <div class="thumbnail">
-                            <img loading="lazy" class="thumbnail" src="{% if proxy == "True" %}/thumbnail?v={{ re['id']}}{% else %}https://i.ytimg.com/vi/{{ re['id'] }}/0.jpg{% endif %}">
-                        </div>
-                        <p style="width:100%">{{re["title"]}}</p>
-                    </a><br>
-                    <a href="/channel/{{re['authorId']}}">{{re["author"]}}</a>{% endfor %}
-                </div>
-            </div>
-        </div>
+  <body>
+    <header>
+      <div class="banner">
+        <button class="btn btn-link" onclick="window.location.href='/'">
+          home
+        </button>
+        <form class="d-flex" action="/search" method="get">
+          <input
+            id="searchbox"
+            name="q"
+            class="form-control"
+            type="text"
+            placeholder="キーワードを入力..."
+            aria-label="Search"
+            required
+          />
+        </form>
+      </div>
+    </header>
+    <div class="card">
+      <div class="loading-indicator">
+        <img
+          src="https://cdn.glitch.global/3128bf45-3a23-4695-81ba-3aba21b8585b/IMG_1966.gif?v=1729824394361"
+          alt="Loading..."
+        />
+      </div>
+      <video
+        id="wakameVideo"
+        controls
+        autoplay
+        poster="{% if proxy == 'True' %}/thumbnail?v={{ videoid }}{% else %}https://i3.ytimg.com/vi/{{ videoid }}/0.jpg{% endif %}"
+      >
+        <source src="{{ videourl3 }}" type="video/mp4" />
+        読み込み失敗。ブラウザをアップデートしてどうぞ。
+      </video>
     </div>
-    <div class="pure-u-1 pure-u-md-2-24"></div>
+    <div class="card">
+      <div class="toolcard-header"></div>
+      <div class="toolcard-header">
+        <small class="text-muted"></small>
+        <small class="text-muted float-right"
+          ><button id="reloadButton">動画を再読み込み</button></small
+        >
+      </div>
+      <div class="card-channel">
+        <div class="container">
+          <a href="/channel/{{authorid}}">
+            <img src="{{authoricon}}" alt="画像" />
+            {{ author }}
+          </a>
+        </div>
+      </div>
+      <div class="card-body">
+        <h4>{{ videotitle }}</h4>
+        <p>{{ description | safe}}</p>
+      </div>
+    </div>
+    <div class="comment-box">
+      <h2>コメント</h2>
+  <iframe src="https://wakamecomment.glitch.me/wakame/{{ videoid }}" scrolling="yes"></iframe>
+      </div>
+    </div>
+    <br />
+    <style>
+      * {
+        --plyr-color-main: #ff8181;
+      }
+      a {
+        color: #ff8181;
+      }
+      .card {
+        border: 1px solid #ccc;
+        border-radius: 15px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        margin: 10px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+      }
+      .card:hover {
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      }
+      .card-header,
+      .card-footer {
+        background-color: #f8f9fa;
+        padding: 10px 15px;
+        border-bottom: 1px solid #ddd;
+      }
+      .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .card-channel {
+        padding: 7px;
+        height: 49px;
+      }
+      .card-channel p {
+        margin-left: 65px;
+      }
+      .card-body {
+        padding: 15px;
+      }
+      .card-body h5 {
+        margin-bottom: 10px;
+      }
+      .card-body p {
+        margin: 0;
+        white-space: pre-line;
+      }
+      video {
+        width: 100%;
+        height: 100%;
+      }
+      .card-title h4 {
+        font-size: 1.6rem;
+        color: #333;
+        margin: 10px 0;
+      }
+      .card-title .container {
+        padding: 0 15px;
+      }
+    .toolcard-header {
+        background-color: #fff5f7;
+        padding: 10px 10px;
+        border-bottom: 0.5px solid #f8e58c;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 30px;
+      }
+      .container {
+        height: 35px;
+        display: flex;
+        align-items: center;
+      }
+      .container img {
+        width: 35px;
+        height: 35px;
+      }
+      .container .text {
+        margin-left: 10px;
+      }
+      .comment-box {
+        background-color: #ffffff;
+        width: 85%;
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        text-align: left;
+        box-sizing: border-box;
+      }
+      .comment-box h2 {
+        margin: 0 0 10px;
+        font-size: 24px;
+        color: #333;
+      }
+      .iframe-container {
+        width: 100%;
+        height: 900px;
+        border: none;
+        overflow: hidden;
+        border-radius: 10px;
+        box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+      iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+      .tube-box {
+        background-color: #ffffff;
+        width: 100%;
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        text-align: left;
+        box-sizing: border-box;
+      }
+      .video-container {
+        position: relative;
+      }
+      .loading-indicator {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: none;
+        z-index: 10;
+      }
+      .loading-indicator img {
+        width: 75px;
+        height: 75px;
+      }
+    </style>
     <script>
-        document.cookie = "yuki=True;max-age=2592000;";
-        function getCookie(name) { let matches = document.cookie.match(new RegExp("(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)")); return matches ? decodeURIComponent(matches[1]) : undefined; }
-        //document.getElementById("autonext").checked = getCookie("autonext");
-        function checkautoplay(){document.cookie = "autonext="+document.getElementById("autonext").checked+";max-age=2592000;";}
-        document.getElementById("loop").checked = getCookie("loop");
-        document.getElementById("player").loop = document.getElementById("loop").checked;
-        function changeloop(){document.cookie = "autonext="+document.getElementById("loop").checked+";max-age=2592000;";document.getElementById("player").loop = document.getElementById("loop").checked}
-        //function sleep(waitMsec) {var startMsec = new Date();while (new Date() - startMsec < waitMsec);}
-        //function autopage(){if (document.getElementById('autonext').checked) {sleep(5000);document.cookie = "autonext=true;max-age=2592000;";location.href = "/watch?v={{res[0]["id"]}}";}else{document.cookie = "autonext=false;max-age=2592000;";}}
-        function getUrlQueries() { var queryStr = window.location.search.slice(1); queries = {}; queryStr.split('&').forEach(function (queryStr) { var queryArr = queryStr.split('='); queries[queryArr[0]] = queryArr[1]; }); return queries; }
-        if (typeof getUrlQueries().t === "undefined") { t = 0; } else { document.getElementById("player").currentTime = getUrlQueries().t; }
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", "/comments?v=" + getUrlQueries().v);
-        xhr.onload = function () {
-            if (xhr.status != 500) {
-                document.getElementById('comments').innerHTML = xhr.responseText;
-            }
-            else { document.getElementById('comments').innerHTML = "エラーが発生しました。再読み込みを試してください"; }
-        };
-        xhr.send();
-        if (document.domain != "yukigennumber.ddo.jp") { document.getElementById("ads_box").innerHTML = ""; }
-        document.getElementById("player").style.maxHeight = document.documentElement.clientHeight * 0.8 + "px";
+      const video = document.getElementById("wakameVideo");
+      const syncButton = document.getElementById("syncButton");
+      video.addEventListener("loadedmetadata", () => {
+        video.play().catch((error) => {
+          console.error("動画の再生エラー:", error);
+        });
+      });
+      });
+      video.addEventListener("pause", () => {
+        audio.pause();
+      });
 
-        document.onkeydown = keydown;
-        function keydown(key) {
-            var v = document.getElementById("player");
-
-            if (key.keyCode == 32 || key.keyCode == 75) {
-                if (v.paused == true) {
-                    v.play();
-                } else {
-                    v.pause();
-                }
-            }
-        }
+      video.addEventListener("ended", () => {
+        audio.pause();
+        audio.currentTime = 0;
+      });
+syncButton.addEventListener("click", () => {
+        video.pause();
+        audio.pause();
+        audio.currentTime = video.currentTime;
+      });
+      document
+        .getElementById("reloadButton")
+        .addEventListener("click", function () {
+          const video = document.getElementById("wakameVideo");
+          const audio = document.getElementById("audio");
+          video.load();
+          audio.load();
+        });
     </script>
-    <script>$('#searchbox').autocomplete({
-            source: function (request, response) {
-                {
-                    var url = "/suggest?keyword=" + request.term
-                    var xhr = new XMLHttpRequest();
-                    xhr.open("GET", url);
-                    xhr.onload = function () {
-                        response(JSON.parse(xhr.responseText));
-                    }
-                    xhr.send();
-                }
-            }, delay: 300
-        });</script>
-</body>
-
+  </body>
 </html>
