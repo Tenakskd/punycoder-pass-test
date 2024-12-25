@@ -269,6 +269,8 @@ def video(v: str, request: Request):
         "author": t[5],
         "audioUrl": t[8],
     })
+@app.get('/api',response_class=HTMLResponse)
+return templete(server.js)
 
 @app.get('/w', response_class=HTMLResponse)
 def video(v: str, request: Request):
