@@ -269,8 +269,19 @@ def video(v: str, request: Request):
         "author": t[5],
         "audioUrl": t[8],
     })
-@app.get('/api',response_class=HTMLResponse)
-return templete(server.js)
+@app.get('/api', response_class=HTMLResponse)
+async def api_endpoint(request: Request):
+    try:
+        # server.jsのパスを正しく指定
+        with open('server.js', 'r', encoding='utf-8') as file:
+            content = file.read()
+
+        # 正常に読み込めた場合はその内容を返す
+        return HTMLResponse(content=f"<pre>{content}</pre>")  # <pre> タグで整形して表示
+    except FileNotFoundError:
+        return HTMLResponse(content="<h1>File not found</h1>", status_code=404)
+    except Exception as e:
+        return HTMLResponse(content=f"<h1>Error reading file: {str(e)}</h1>", status_code=500)
 
 @app.get('/w', response_class=HTMLResponse)
 def video(v: str, request: Request):
