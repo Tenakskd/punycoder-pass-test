@@ -150,13 +150,6 @@ def get2_data(videoid):
         response = requests.get(url)
         if response.status_code == 200:
             s = response.json()
-            recommended_videos = [{
-               "id": t["videoId"],
-               "title": t["videoTitle"],
-               "authorId": t["channelId"],
-               "author": t["channelName"],
-               "viewCountText": f"{t['videoViews']} views"
-           }]
             stream_url = t["stream_url"]
             description = t["videoDes"].replace("\n", "<br>")
             title = t["videoTitle"]
@@ -164,8 +157,7 @@ def get2_data(videoid):
             author = t["channelName"]
             author_icon = t["channelImage"]
             audioUrl = t["audiourl"]
-            highstreamUrl = t["highstreamUrl"]
-            return recommended_videos, stream_url, description, title, authorId, author, author_icon, highstreamUrl, audioUrl
+            return stream_url, description, title, authorId, author, author_icon, audioUrl
 
 
 def get_search(q,page):
