@@ -158,8 +158,8 @@ def get2_data(videoid):
             author = t["channelName"]
             author_icon = t["channelImage"]
             audioUrl = t["audiourl"]
-            
-            return stream_url, description, title, authorId, author, author_icon, audiourl     
+            highstreamUrl = t["highstreamUrl"]
+            return recommended_videos, stream_url, description, title, authorId, author, author_icon, audiourl,highstreamurl
 
 
 def get_search(q,page):
