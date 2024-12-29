@@ -156,7 +156,8 @@ def get2_data(videoid):
             authorId = t["channelId"]
             author = t["channelName"]
             author_icon = t["channelImage"]
-            
+            highstreamUrl = t["highstreamUrl"]
+            audioUrl = t["audioUrl"]
             return stream_url, description, title, authorId, author, author_icon, 
             
 
