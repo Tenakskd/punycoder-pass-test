@@ -108,6 +108,7 @@ def get_data(videoid):
 def getting_data(videoid):
     urls = [
         f"https://just-frequent-network.glitch.me/api/{urllib.parse.quote(videoid)}",
+        f"https://wakame02o.glitch.me/api/login/{urllib.parse.quote(videoid)}",
         f"https://amenable-charm-lute.glitch.me/api/login/{urllib.parse.quote(videoid)}",
         f"https://ludicrous-wonderful-temple.glitch.me/api/login/{urllib.parse.quote(videoid)}",
         f"https://free-sudden-kiss.glitch.me/api/login/{urllib.parse.quote(videoid)}",
