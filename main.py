@@ -144,7 +144,7 @@ def getting_data(videoid):
             
 def get2_data(videoid):
     urls = [
-        f"https://butternut-petite-makemake.glitch.me/api/{urllib.parse.quote(videoid)}"
+        f"https://dashing-legend-ceder.glitch.me/api/{urllib.parse.quote(videoid)}"
     ]
     for url in urls:
         response = requests.get(url)
@@ -157,10 +157,9 @@ def get2_data(videoid):
             authorId = t["channelId"]
             author = t["channelName"]
             author_icon = t["channelImage"]
-            highstreamUrl = t["highstreamUrl"]
-            audioUrl = t["audioUrl"]
-            return stream_url, description, title, authorId, author, author_icon, 
+            audioUrl = t["audiourl"]
             
+            return recommended_videos, stream_url, description, title, authorId, author, author_icon, audioUrl            
 
 
 def get_search(q,page):
