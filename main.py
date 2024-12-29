@@ -301,6 +301,7 @@ def video(v: str, request: Request):
         "authorid": t[4],
         "authoricon": t[6],
         "author": t[5],
+        "audiourl": t[7]
     })
 @app.get("/comment")
 def comments(request: Request,v:str):
