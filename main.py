@@ -11,7 +11,7 @@ from cache import cache
 
 max_api_wait_time = 3
 max_time = 12
-apis = [r"https://pol1.iv.ggtyler.dev/",r"https://nyc1.iv.ggtyler.dev/",r"https://cal1.iv.ggtyler.dev/",r"https://invidious.jing.rocks/",r"https://invidious.schenkel.eti.br/",r"https://youtube.provacyplz.org/"r"https://lekker.gay/",r"https://invidious.darkness.services/",r"https://y.com.sb/",r"https://inv.vern.cc/",r"https://invidious.vern.cc/",r"https://yt.vern.cc/",r"https://invidious.materialio.us/",r"https://inv.tux.pizza/",r"https://vid.puffyan.us",r"https://invidious.private.coffee/",r"https://invidious.varis.social/",r"https://iv.melmac.space/",r"https://youtube.mosesmang.com/",r"https://rust.oskamp.nl/",r"https://yt.yoc.ovh/",r"https://invidious.0011.lt/",r"https://invidious.baczek.me/",r"https://youtube.lurkmore.com/",r"https://invidious.flokinet.to/"]
+apis = [r"https://pol1.iv.ggtyler.dev/",r"https://nyc1.iv.ggtyler.dev/",r"https://cal1.iv.ggtyler.dev/",r"https://invidious.jing.rocks/",r"https://invidious.schenkel.eti.br/",r"https://youtube.provacyplz.org/"r"https://lekker.gay/",r"https://invidious.darkness.services/",r"https://inv.vern.cc/",r"https://invidious.vern.cc/",r"https://yt.vern.cc/",r"https://invidious.materialio.us/",r"https://inv.tux.pizza/",r"https://vid.puffyan.us",r"https://invidious.private.coffee/",r"https://invidious.varis.social/",r"https://iv.melmac.space/",r"https://youtube.mosesmang.com/"]
 url = requests.get(r'https://raw.githubusercontent.com/mochidukiyukimi/yuki-youtube-instance/main/instance.txt').text.rstrip()
 version = "1.0"
 
