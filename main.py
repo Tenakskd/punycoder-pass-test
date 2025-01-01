@@ -160,9 +160,8 @@ def get2_data(videoid):
             authorId = t["channelId"]
             author = t["channelName"]
             author_icon = t["channelImage"]
-            highstreamUrl = t["highstreamUrl"]
             audioUrl = t["audioUrl"]
-            return stream_url, description, title, authorId, author, author_icon, highstreamUrl,audioUrl
+            return stream_url, description, title, authorId, author, author_icon, audioUrl
 
 
 def get_search(q,page):
@@ -304,7 +303,7 @@ def video(v: str, request: Request):
         "authorid": t[4],
         "authoricon": t[6],
         "author": t[5],
-        "audioUrl": t[8]
+        "audioUrl": t[7]
     })
 @app.get("/comment")
 def comments(request: Request,v:str):
