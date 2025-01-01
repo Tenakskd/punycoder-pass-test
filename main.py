@@ -108,9 +108,7 @@ def get_data(videoid):
 def getting_data(videoid):
     urls = [
         f"https://just-frequent-network.glitch.me/api/{urllib.parse.quote(videoid)}",
-        f"https://wakame02o.glitch.me/api/login/{urllib.parse.quote(videoid)}",
         f"https://amenable-charm-lute.glitch.me/api/login/{urllib.parse.quote(videoid)}",
-        f"https://ludicrous-wonderful-temple.glitch.me/api/login/{urllib.parse.quote(videoid)}",
         f"https://free-sudden-kiss.glitch.me/api/login/{urllib.parse.quote(videoid)}",
         f"https://wtserver1.glitch.me/api/login/{urllib.parse.quote(videoid)}",
         f"https://wataamee.glitch.me/api/{urllib.parse.quote(videoid)}",
@@ -156,7 +154,7 @@ def get2_data(videoid):
             authorId = t["channelId"]
             author = t["channelName"]
             author_icon = t["channelImage"]
-            audioUrl = t["audiourl"]
+            audioUrl = t["audioUrl"]
             return stream_url, description, title, authorId, author, author_icon, audioUrl
 
 
@@ -299,7 +297,7 @@ def video(v: str, request: Request):
         "authorid": t[4],
         "authoricon": t[6],
         "author": t[5],
-        "audiourl": t[7]
+        "audioUrl": t[7]
     })
 @app.get("/comment")
 def comments(request: Request,v:str):
