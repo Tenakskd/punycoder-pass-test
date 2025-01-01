@@ -296,7 +296,7 @@ def video(v: str, request: Request):
     return template('video3.html', {
         "request": request,
         "videoid": videoid,
-        "videourl3": t[1],
+        "lowstream_url": t[1],
         "description": t[2],
         "videotitle": t[3],
         "authorid": t[4],
