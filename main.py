@@ -147,8 +147,7 @@ def get2_data(videoid):
         f"https://test-blank-page.glitch.me/api/server/v3/{urllib.parse.quote(videoid)}",
         f"https://test-blank-page.glitch.me/api/server/v4/{urllib.parse.quote(videoid)}",
         f"https://test-blank-page.glitch.me/api/server/v5/{urllib.parse.quote(videoid)}",
-        f"https://test-blank-page.glitch.me/api/server/v6/{urllib.parse.quote(videoid)}",
-        f"https://test-blank-page.glitch.me/api/server/v7/{urllib.parse.quote(videoid)}",
+        f"https://test-blank-page.glitch.me/api/server/v7/{urllib.parse.quote(videoid)}"
     ]
     for url in urls:
         response = requests.get(url)
