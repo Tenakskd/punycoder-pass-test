@@ -129,7 +129,7 @@ def getting_data(videoid):
                "viewCountText": f"{t['videoViews']} views"
            }]
             
-            lowstream_url = t["stream_url"]
+            stream_url = t["stream_url"]
             description = t["videoDes"].replace("\n", "<br>")
             title = t["videoTitle"]
             authorId = t["channelId"]
@@ -153,7 +153,7 @@ def get2_data(videoid):
         response = requests.get(url)
         if response.status_code == 200:
             s = response.json()
-            stream_url = t["stream_url"]
+            lowstream_url = t["stream_url"]
             description = t["videoDes"].replace("\n", "<br>")
             title = t["videoTitle"]
             authorId = t["channelId"]
@@ -296,7 +296,6 @@ def video(v: str, request: Request):
     return template('video3.html', {
         "request": request,
         "videoid": videoid,
-        "res": t[0],
         "videourl3": t[1],
         "description": t[2],
         "videotitle": t[3],
