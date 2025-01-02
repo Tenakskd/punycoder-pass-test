@@ -153,8 +153,17 @@ def get2_data(videoid):
     for url in urls:
         response = requests.get(url)
         if response.status_code == 200:
-            s = response.json()
-                   stream_url = t["stream_url"]
+            t = response.json()
+            
+            recommended_videos = [{
+               "id": t["videoId"],
+               "title": t["videoTitle"],
+               "authorId": t["channelId"],
+               "author": t["channelName"],
+               "viewCountText": f"{t['videoViews']} views"
+           }]
+            
+            stream_url = t["stream_url"]
             description = t["videoDes"].replace("\n", "<br>")
             title = t["videoTitle"]
             authorId = t["channelId"]
@@ -365,13 +374,6 @@ def comments(request: Request,v:str):
 @app.get("/thumbnail")
 def thumbnail(v:str):
     return Response(content = requests.get(fr"https://img.youtube.com/vi/{v}/0.jpg").content,media_type=r"image/jpeg")
-
-@app.get("/bbs",response_class=HTMLResponse)
-def view_bbs(request: Request,name: Union[str, None] = "",seed:Union[str,None]="",channel:Union[str,None]="main",verify:Union[str,None]="false",yuki: Union[str] = Cookie(None)):
-    if not(check_cokie(yuki)):
-        return redirect("/")
-    res = HTMLResponse(requests.get(fr"{url}bbs?name={urllib.parse.quote(name)}&seed={urllib.parse.quote(seed)}&channel={urllib.parse.quote(channel)}&verify={urllib.parse.quote(verify)}",cookies={"yuki":"True"}).text)
-    return res
 
 @cache(seconds=5)
 def bbsapi_cached(verify,channel):
