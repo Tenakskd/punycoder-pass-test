@@ -142,27 +142,29 @@ def getting_data(videoid):
             
 def get2_data(videoid):
     urls = [
-        f"https://test-blank-page.glitch.me/api/server/v1/{urllib.parse.quote(videoid)}",
-        f"https://test-blank-page.glitch.me/api/server/v2/{urllib.parse.quote(videoid)}",
-        f"https://test-blank-page.glitch.me/api/server/v3/{urllib.parse.quote(videoid)}",
-        f"https://test-blank-page.glitch.me/api/server/v4/{urllib.parse.quote(videoid)}",
-        f"https://test-blank-page.glitch.me/api/server/v5/{urllib.parse.quote(videoid)}",
-        f"https://test-blank-page.glitch.me/api/server/v7/{urllib.parse.quote(videoid)}"
+        f"https://streamitedu.glitch.me/api/server/v1/{urllib.parse.quote(videoid)}",
+        f"https://streamitedu.glitch.me/api/server/v2/{urllib.parse.quote(videoid)}",
+        f"https://streamitedu.glitch.me/api/server/v3/{urllib.parse.quote(videoid)}",
+        f"https://streamitedu.glitch.me/api/server/v4/{urllib.parse.quote(videoid)}",
+        f"https://streamitedu.glitch.me/api/server/v5/{urllib.parse.quote(videoid)}",
+        f"https://streamitedu.glitch.me/api/server/v6/{urllib.parse.quote(videoid)}",
+        f"https://streamitedu.glitch.me/api/server/v7/{urllib.parse.quote(videoid)}"
     ]
     for url in urls:
         response = requests.get(url)
         if response.status_code == 200:
             s = response.json()
-            lowstream_url = t["stream_url"]
+                   stream_url = t["stream_url"]
             description = t["videoDes"].replace("\n", "<br>")
             title = t["videoTitle"]
             authorId = t["channelId"]
             author = t["channelName"]
             author_icon = t["channelImage"]
-            highstreamUrl = t["stream_url"]
+            highstreamUrl = t["highstreamUrl"]
             audioUrl = t["audioUrl"]
-            return stream_url, description, title, authorId, author, author_icon, highstreamUrl, audioUrl
-
+            
+            return recommended_videos, stream_url, description, title, authorId, author, author_icon, highstreamUrl, audioUrl
+            
 
 def get_search(q,page):
     global logs
@@ -296,14 +298,15 @@ def video(v: str, request: Request):
     return template('video3.html', {
         "request": request,
         "videoid": videoid,
-        "lowstream_url": t[1],
+        "res": t[0],
+        "videourl2": t[1],
         "description": t[2],
         "videotitle": t[3],
         "authorid": t[4],
         "authoricon": t[6],
         "author": t[5],
-        "audioUrl": t[8]
-    })
+        "audioUrl": t[8],
+    })   })
 @app.get("/comment")
 def comments(request: Request,v:str):
     return template("comment.html",{"request": request,"comments":get_comments(v)})
