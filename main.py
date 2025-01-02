@@ -299,7 +299,7 @@ def video(v: str, request: Request):
         "request": request,
         "videoid": videoid,
         "res": t[0],
-        "videourl2": t[1],
+        "videourl3": t[1],
         "description": t[2],
         "videotitle": t[3],
         "authorid": t[4],
