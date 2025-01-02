@@ -315,7 +315,7 @@ def video(v: str, request: Request):
         "authoricon": t[6],
         "author": t[5],
         "audioUrl": t[8],
-    })   })
+    })
 @app.get("/comment")
 def comments(request: Request,v:str):
     return template("comment.html",{"request": request,"comments":get_comments(v)})
